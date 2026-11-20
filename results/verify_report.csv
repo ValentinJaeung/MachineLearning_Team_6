@@ -1,0 +1,42 @@
+﻿group,check,result,detail
+A,train and val share no year,PASS,overlap=set()
+A,train and test share no year,PASS,overlap=set()
+A,val and test share no year,PASS,overlap=set()
+A,train: expected years,PASS,"[2022, 2023, 2024]"
+A,"train: every file has 5,408,935 rows",PASS,
+A,val: expected years,PASS,[2025]
+A,"val: every file has 1,845,381 rows",PASS,
+A,test: expected years,PASS,[2026]
+A,"test: every file has 1,847,936 rows",PASS,
+B,train: xgb matrix has no outcome/post-hoc/id column,PASS,14 features only
+B,val: xgb matrix has no outcome/post-hoc/id column,PASS,14 features only
+B,test: xgb matrix has no outcome/post-hoc/id column,PASS,14 features only
+B,linear matrix column names contain no banned field,PASS,357 columns
+B,xgb feature list is exactly the 14 agreed features,PASS,14 columns
+B,scenario columns are stored apart from the feature matrices,PASS,
+C,Distance: median/mean/scale recomputed from train match,PASS,median=674.0000 mean=832.3831
+C,CRSElapsedTime: median/mean/scale recomputed from train match,PASS,median=127.0000 mean=144.3249
+C,A_absorb_rate: median/mean/scale recomputed from train match,PASS,median=0.2351 mean=0.2621
+C,B1_turnaround_mean: median/mean/scale recomputed from train match,PASS,median=61.9006 mean=64.8415
+C,B2_day_seq_mean: median/mean/scale recomputed from train match,PASS,median=2.9490 mean=2.9449
+C,B3_first_flight_rate: median/mean/scale recomputed from train match,PASS,median=0.1682 mean=0.2491
+C,C_bad_day_rel_fail: median/mean/scale recomputed from train match,PASS,median=-0.0026 mean=-0.0044
+D,train: y_class within 0..9,PASS,min=0 max=9
+D,"train: class 9 means no arrival time, and only class 9 does",PASS,"class9=118,960"
+D,train: delay minutes reproduce the bin index,PASS,
+D,val: y_class within 0..9,PASS,min=0 max=9
+D,"val: class 9 means no arrival time, and only class 9 does",PASS,"class9=32,173"
+D,val: delay minutes reproduce the bin index,PASS,
+D,test: y_class within 0..9,PASS,min=0 max=9
+D,"test: class 9 means no arrival time, and only class 9 does",PASS,"class9=39,224"
+D,test: delay minutes reproduce the bin index,PASS,
+E,every target year was built from the year before it,PASS,5 years
+E,"train: substitute_level fully assigned, 0..3",PASS,L0=25.2% L3=1.7%
+E,"val: substitute_level fully assigned, 0..3",PASS,L0=32.9% L3=1.1%
+E,"test: substitute_level fully assigned, 0..3",PASS,L0=38.2% L3=1.6%
+E,smoothing k was estimated on the training source years only,PASS,k_A=3.99 k_C=4.04
+F,val: no airline outside the train vocabulary,PASS,14 airlines
+F,test: no airline outside the train vocabulary,PASS,12 airlines
+F,"val: unseen airports fold into '기타', not a new column",PASS,368 categories
+F,"test: unseen airports fold into '기타', not a new column",PASS,368 categories
+F,linear matrix width is identical across splits,PASS,357 columns

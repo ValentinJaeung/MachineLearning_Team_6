@@ -1,0 +1,12 @@
+# Exact versions used for the run reported in docs/REPORT.md
+# (Python 3.15.2, Windows 11, CPU-only).
+pandas==3.1.0
+numpy==2.5.4
+pyarrow==26.0.0
+scipy==1.18.1
+scikit-learn==1.9.1
+xgboost==3.4.1
+torch==2.15.0
+matplotlib==3.11.2
+joblib==1.6.0
+shap==0.54.1

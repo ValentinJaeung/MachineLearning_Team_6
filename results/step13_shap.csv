@@ -1,0 +1,10 @@
+﻿feature,label,mean_abs_shap,method,passenger_can_change
+Reporting_Airline,항공사,0.212776,TreeSHAP (exact),True
+crs_dep_hour,출발 시각,0.194011,TreeSHAP (exact),True
+Origin,출발 공항,0.153082,TreeSHAP (exact),False
+Dest,도착 공항,0.136713,TreeSHAP (exact),False
+crs_arr_hour,도착 시각,0.098412,TreeSHAP (exact),False
+DayOfWeek,요일,0.061816,TreeSHAP (exact),True
+Month,월,0.059607,TreeSHAP (exact),False
+Distance,거리,0.031212,TreeSHAP (exact),False
+CRSElapsedTime,예정 비행시간,0.028136,TreeSHAP (exact),False

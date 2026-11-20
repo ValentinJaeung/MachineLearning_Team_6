@@ -1,0 +1,4 @@
+﻿split,rows,linear_columns,nonzeros,density,c0_share,airports_folded_to_other,airport_fold_share,airlines_unseen_in_train,airports_unseen_in_train
+train,5408935,357,75725090,0.03922,0.572955,534236,0.04938,0,0
+val,1845381,357,25835334,0.03922,0.564836,187878,0.0509,0,1705
+test,1847936,357,25871104,0.03922,0.564179,199329,0.05393,0,8915

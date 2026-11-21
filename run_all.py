@@ -41,6 +41,7 @@ STEPS = [
     (14, "step14_scenario_models.py", "모델 A·B·C와 합성", "45분"),
     (15, "step15_service_eval.py", "test 2026 서비스 평가 (한 번만)", "10분"),
     (16, "step16_demo_data.py", "데모용 사전 계산", "5분"),
+    (None, "figure_guarantee.py", "방법 설명 그림 (분포 → 보장 시각)", "1분"),
 ]
 
 

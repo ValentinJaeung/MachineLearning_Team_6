@@ -18,22 +18,6 @@
     "guaranteed_90_best_min": 15.370510396975455,
     "guaranteed_90_worst_min": 113.3678715761114
   },
-  "bad_day_rule": {
-    "method": "airport x year relative quantile",
-    "quantile": 0.9,
-    "threshold_min": -8.5,
-    "threshold_median": 35.2,
-    "threshold_max": 199.0
-  },
-  "report_card_join": {
-    "method": "flight_key -> route_key -> group_key -> global mean",
-    "level0_flight": 0.25180428309824393,
-    "level1_route": 0.6911432657260626,
-    "level2_group": 0.03961519226982761,
-    "level3_global": 0.017437258905865942,
-    "median_n_bad_per_flight_key": 1.0,
-    "median_n_absorb_per_flight_key": 1.0
-  },
   "one_hot_airports": {
     "n_airports_total": 367,
     "n_onehot": 136,
@@ -71,10 +55,5 @@
       "SecurityDelay": 0.0018,
       "LateAircraftDelay": 0.4067
     }
-  },
-  "smoothing_k": {
-    "method": "empirical Bayes, estimated on the training source years",
-    "k_A": 3.9905248954789907,
-    "k_C": 4.040845908011679
   }
 }

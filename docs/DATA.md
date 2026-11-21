@@ -26,15 +26,16 @@
 성능 차이가 "연도 차이"인지 "계절 차이"인지 구분할 수 없습니다. 여름 3개월로 고정하면
 비교할 축이 연도 하나만 남습니다.
 
-**왜 2021년이 포함되는가.** 학습에 쓰지 않습니다. 2022년 편에 붙일 "작년 성적표"의
-재료로만 씁니다.
+**왜 2021년이 포함되는가.** 학습에 쓰지 않습니다. 2022년 편의 `sched_pad`
+(예정 소요시간 − 작년 같은 노선 실제 소요시간 중앙값)를 계산할 때 "작년"에 해당하는
+해라서 내려받습니다. 그 외에는 쓰이지 않습니다.
 
 ## 3. 분할
 
 ```
-train   2022 · 2023 · 2024     성적표는 각각 2021 · 2022 · 2023 에서
-val     2025                   성적표는 2024 에서
-test    2026                   성적표는 2025 에서
+train   2022 · 2023 · 2024     sched_pad 의 직전 해는 각각 2021 · 2022 · 2023
+val     2025                   직전 해는 2024
+test    2026                   직전 해는 2025
 ```
 
 무작위로 섞지 않습니다. 실제 사용 상황이 "과거로 배워 미래를 맞히는" 것이고,
@@ -64,11 +65,7 @@ test    2026                   성적표는 2025 에서
 | 묶음 | 개수 | 변수 |
 |---|---:|---|
 | 시각 변환 | 4 | `crs_dep_min` `crs_arr_min` `crs_dep_hour` `crs_arr_hour` |
-| 이름표(키) | 3+1 | `flight_key` `route_key` `group_key` `substitute_level` |
-| 연결편 | 5 | `day_seq` `is_first_flight` `turnaround_min` `prev_delayed` `absorbed` |
-| 공항-날짜 | 4 | `n_flights` `mean_dep_delay` `fail_rate` `bad_day` |
-| 과거 이력(성적표) | 5 | `A_absorb_rate` `B1_turnaround_mean` `B2_day_seq_mean` `B3_first_flight_rate` `C_bad_day_rel_fail` |
-| ↑ 위 세 줄 | — | 기각됨. `src/archive/` 참조 |
+| 이름표(키) | 3 | `flight_key` `route_key` `group_key` |
 | **시간표 파생** | **3** | **`sched_pad` `dest_arr_load` `days_to_nearest_holiday`** ← 모델 입력 |
 | 그날의 유형 | 2 | `scen_origin` `scen_dest` (5유형, 14단계 모델 B 전용) |
 | 정답 | 1 | `y_class` (10구간) |

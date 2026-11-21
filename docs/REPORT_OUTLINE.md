@@ -557,7 +557,7 @@ CDF 오차 **1.9배 개선**, log loss는 오히려 0.0017 **나빠짐**.
 | | 내용 |
 |---|---|
 | A | 파이프라인 전체 설계 (`docs/PROPOSAL_FLOW.md`) |
-| B | **누출 감사 44항목 전문** (`results/verify_report.csv`) |
+| B | **누출 감사 37항목 전문** (`results/verify_report.csv`) |
 | C | 그림 27장 |
 | D | 하이퍼파라미터 탐색 7종 (`results/step11_xgb_search.csv`) |
 | D-2 | 다항 차수·규제 강도·시드 재현 (`results/step11c_polynomial.csv` · `step11c_seed_check.csv`) |

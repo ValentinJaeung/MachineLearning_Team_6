@@ -179,34 +179,39 @@ def main() -> int:
     table = pd.DataFrame(rows)
     best_degree = int(table.loc[table["log_loss"].idxmin(), "degree"])
     say(f"가장 좋은 차수 {best_degree} → 규제 강도 비교")
-    if best_degree > 1:
-        poly_train, poly_val, _ = expand(num_train, num_val, best_degree)
-        X_train = sparse.hstack([cat_train, sparse.csr_matrix(poly_train)],
-                                format="csr")
-        X_val = sparse.hstack([cat_val, sparse.csr_matrix(poly_val)],
-                              format="csr")
-        for c in C_GRID:
-            if c == 1.0:
-                continue
-            scores, info = fit_logistic(X_train, train["cls"], X_val,
-                                        val["cls"], val["delay"], c=c)
-            record({"model": "M1 로지스틱", "degree": best_degree, "C": c,
-                    "numeric_columns": int(poly_train.shape[1]),
-                    "total_columns": int(X_train.shape[1]),
-                    **common.flat(scores), **info})
-            say(f"  C={c}: log loss {scores['log_loss']}")
-        del X_train, X_val, poly_train, poly_val
+    # Run the sweep even when degree 1 wins: the chosen model IS that one, so
+    # "how hard should it be regularised" is a question about the model we
+    # report, not about the expansion.
+    poly_train, poly_val, _ = expand(num_train, num_val, best_degree)
+    X_train = sparse.hstack([cat_train, sparse.csr_matrix(poly_train)],
+                            format="csr")
+    X_val = sparse.hstack([cat_val, sparse.csr_matrix(poly_val)],
+                          format="csr")
+    for c in C_GRID:
+        if c == 1.0:
+            continue
+        scores, info = fit_logistic(X_train, train["cls"], X_val,
+                                    val["cls"], val["delay"], c=c)
+        record({"model": "M1 로지스틱", "degree": best_degree, "C": c,
+                "numeric_columns": int(poly_train.shape[1]),
+                "total_columns": int(X_train.shape[1]),
+                **common.flat(scores), **info})
+        say(f"  C={c}: log loss {scores['log_loss']}")
+    del X_train, X_val, poly_train, poly_val
 
     # ------------------------------------------------------------------ #
     # 3. does the tree need it?
     # ------------------------------------------------------------------ #
-    if not args.skip_xgb and best_degree > 1:
+    expanded = table[table["degree"] > 1]
+    tree_degree = (int(expanded.loc[expanded["log_loss"].idxmin(), "degree"])
+                   if not expanded.empty else None)
+    if not args.skip_xgb and tree_degree is not None:
         import xgboost as xgb
 
-        say("XGBoost: 같은 확장을 트리에 줘도 달라지는가")
+        say(f"XGBoost: 차수 {tree_degree} 확장을 트리에 줘도 달라지는가")
         poly = None
         from sklearn.preprocessing import PolynomialFeatures
-        poly = PolynomialFeatures(degree=best_degree, include_bias=False)
+        poly = PolynomialFeatures(degree=tree_degree, include_bias=False)
         extra_train = poly.fit_transform(num_train)[:, num_train.shape[1]:]
         extra_val = poly.transform(num_val)[:, num_train.shape[1]:]
         extra_names = [f"poly_{i}" for i in range(extra_train.shape[1])]
@@ -231,7 +236,7 @@ def main() -> int:
         probs = booster.predict(dval, iteration_range=(0, booster.best_iteration + 1)
                                 ).astype("float64")
         scores = common.evaluate(probs, val["cls"], val["delay"])
-        record({"model": "M2 XGBoost", "degree": best_degree, "C": None,
+        record({"model": "M2 XGBoost", "degree": tree_degree, "C": None,
                 "numeric_columns": int(extra_train.shape[1] + num_train.shape[1]),
                 "total_columns": int(frame_train.shape[1]),
                 **common.flat(scores),

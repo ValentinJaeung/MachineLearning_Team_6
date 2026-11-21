@@ -1,6 +1,5 @@
 """
 Step 15 - did the promise hold? The one and only look at test 2026.
-(PROPOSAL_FLOW §4, 15단계)
 
 Reads  data/prep/ (step 9), data/model/ (steps 11, 12)
 Writes data/model/test_pred_{raw,calibrated}.npy
@@ -182,8 +181,6 @@ def main() -> int:
         "airline": meta["Reporting_Airline"],
         "airport_size": size_band,
         "month": pd.to_datetime(meta["FlightDate"]).dt.month.astype(str) + "월",
-        "substitute_level": meta["substitute_level"].map(
-            {0: "0 편명 일치", 1: "1 노선 대체", 2: "2 그룹 대체", 3: "3 전체 평균"}),
     }
     print("\n=== 90% 약속의 약한 곳 ===")
     for name, series in groups.items():

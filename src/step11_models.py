@@ -1,8 +1,7 @@
 """
 Step 11 - three models, one split, one set of metrics.
-(PROPOSAL_FLOW §4, 11단계)
 
-Reads  data/prep/ (step 9), results/step10_gate.csv (step 10)
+Reads  data/prep/ (step 9)
 Writes data/model/{model}.*            fitted models and validation predictions
        results/step11_models.csv       the comparison table
        results/step11_reliability.csv  predicted vs actual at every CDF edge
@@ -62,10 +61,9 @@ def say(message: str) -> None:
 
 
 def chosen_features() -> list[str]:
-    """Columns removed from both encodings so the model sees the 12 inputs."""
-    drop = [c for c in config.HISTORY_FEATURES]
+    """Nothing is dropped: step 9 writes exactly the twelve inputs."""
     print(f"[입력] {len(config.MODEL_FEATURES)}개: {config.MODEL_FEATURES}")
-    return drop
+    return []
 
 
 def append(path, row: dict) -> None:

@@ -1,6 +1,5 @@
 """
 Step 9 - two design matrices from the same fourteen features.
-(PROPOSAL_FLOW §4, 9단계)
 
 Reads  data/dataset/{split}.parquet (step 7), results/step08_settings.json
 Writes data/prep/{split}_linear.npz      sparse matrix for the linear models
@@ -63,7 +62,7 @@ TARGET = "y_class"
 CATEGORICAL = ["Reporting_Airline", "Origin", "Dest", "DayOfWeek", "Month"]
 HOURS = ["crs_dep_hour", "crs_arr_hour"]
 NUMERIC = (HOURS + ["Distance", "CRSElapsedTime"]
-           + config.SCHEDULE_FEATURES + config.HISTORY_FEATURES)
+           + config.SCHEDULE_FEATURES)
 FEATURE_COLUMNS = CATEGORICAL + NUMERIC
 
 LINEAR_CATEGORICAL = CATEGORICAL + HOURS
@@ -76,8 +75,7 @@ META_COLUMNS = [
     "Year", "FlightDate", "flight_key", "route_key", "group_key",
     "Origin", "Dest", "Reporting_Airline", "Flight_Number_Reporting_Airline",
     "OriginCityName", "DestCityName", "crs_dep_min", "crs_arr_min",
-    "crs_dep_hour", "substitute_level", "is_substituted", "base_fail_rate",
-    "arr_delay_min",
+    "crs_dep_hour", "arr_delay_min",
 ]
 
 AIRPORT_COLUMNS = ["Origin", "Dest"]

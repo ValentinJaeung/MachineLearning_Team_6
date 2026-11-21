@@ -1,6 +1,5 @@
 """
 Step 6 - what kind of day was it, and does that division really exist.
-(PROPOSAL_FLOW §4, 6단계 · §3-2 ⑥)
 
 Reads  data/clean/{year}_{mm}.parquet   (2022-2026)
 Writes data/scenario/{year}_{mm}.parquet   one row per flight, same order

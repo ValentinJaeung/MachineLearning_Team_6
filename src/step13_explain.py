@@ -1,6 +1,5 @@
 """
 Step 13 - what the model looks at, and what the passenger can actually change.
-(PROPOSAL_FLOW §4, 13단계)
 
 Reads  data/model/xgboost.json (step 11), data/prep/ (step 9)
 Writes results/step13_shap.csv, results/step13_whatif_hour.csv

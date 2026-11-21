@@ -1,6 +1,5 @@
 """
 Step 2 - cleaning, clock conversion, keys, and the ten-class target.
-(PROPOSAL_FLOW §4, 2단계)
 
 Reads  data/raw/{year}_{mm}.parquet        (step 1)
 Writes data/clean/{year}_{mm}.parquet
@@ -15,10 +14,9 @@ clock -> number   crs_dep_min, crs_arr_min, crs_dep_hour, crs_arr_hour
 three keys        flight_key = airline + flight no. + origin + dest  (narrow)
                   route_key  = airline + origin + dest               (middle)
                   group_key  = airline + origin + scheduled dep hour (wide)
-                  Airlines reassign flight numbers to different routes between
-                  years, so the narrow key alone would miss most of last year's
-                  record. Step 5 walks narrow -> wide and records how far it
-                  had to go (substitute_level).
+                  Airlines reassign flight numbers to different routes
+                  between years, so the narrow key alone does not identify a
+                  route. route_key is what step 3 measures block time on.
 
 the target        y_class, 0..9 over the bins in config.EDGES, plus class 9
                   "never arrived" for a cancellation or a diversion that did

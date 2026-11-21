@@ -1,6 +1,5 @@
 """
 Step 12 - making the promised probability the real one.
-(PROPOSAL_FLOW §4, 12단계)
 
 Reads  data/prep/ (step 9), data/model/ (step 11)
 Writes data/model/production_calibrator.joblib, production_prior.json

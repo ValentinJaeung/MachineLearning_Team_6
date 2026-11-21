@@ -1,0 +1,26 @@
+{
+  "note": "model-input columns only (12 xgb / 355 linear)",
+  "splits": {
+    "train": {
+      "rows": 5408935,
+      "linear_cols": 355,
+      "linear_sha": "44e3e76d55d2705d7b8cd277cdc26297377e77704aa0aefa548689e3fed0b6ed",
+      "xgb_sha": "1feb64960feda1b2c63ca80c3107f1a662e7afd0b3c3c8539de9681c183f4f3a",
+      "y_sha": "58bfaf9cc28356f779f0c7c1fbebeeb4d580677557c0128fff29be09022c37dc"
+    },
+    "val": {
+      "rows": 1845381,
+      "linear_cols": 355,
+      "linear_sha": "3f370ce5bb20c1a47c726431a15330ade9625d29c53eca87361487c4ecddb95b",
+      "xgb_sha": "83b9fdf4a3a419d1fc7da9513fae212fb9b2be2b390f23c4731e26b84f362fce",
+      "y_sha": "2328ca0a2f79cae87b4feb261d8177b4c27feafbe40c8e18455f0093671f5be6"
+    },
+    "test": {
+      "rows": 1847936,
+      "linear_cols": 355,
+      "linear_sha": "f01d75570150e288670dfa553e878cf19dddec480f6f7bbf5f2b49892075deaf",
+      "xgb_sha": "24026af48a6110bb25edec14c43908dadb24466525e1face858373abaf7d9691",
+      "y_sha": "b97838afbd40247d01abca41534b627943498c4a05541677b299126e62378c17"
+    }
+  }
+}

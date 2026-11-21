@@ -1,7 +1,7 @@
 """
 One place for every setting the 16 steps share.
 
-The variable groups below are the ones defined in docs/PROPOSAL_FLOW.md §3-1.
+The variable groups below are the ones the leakage audit checks.
 Keeping them here, rather than re-listing columns inside each step, is what
 makes the leakage rule checkable: a reviewer can read ONE list to see what the
 model is allowed to see.
@@ -35,9 +35,6 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = PROJECT_ROOT / "data"
 RAW_DIR = DATA_DIR / "raw"             # step 1  - BTS monthly parquet
 CLEAN_DIR = DATA_DIR / "clean"         # step 2  - times, keys, y_class
-LEGS_DIR = DATA_DIR / "legs"           # step 3  - same-aircraft chaining
-AIRPORT_DAY_DIR = DATA_DIR / "airport_day"   # step 4
-HISTORY_DIR = DATA_DIR / "history"     # step 5  - last year's report card
 SCHEDULE_DIR = DATA_DIR / "schedule"   # step 3  - timetable-derived features
 SCENARIO_DIR = DATA_DIR / "scenario"   # step 6  - airport-day type
 DATASET_DIR = DATA_DIR / "dataset"     # step 7  - one table, split by year
@@ -60,7 +57,7 @@ SPLIT_YEARS = {"train": [2022, 2023, 2024], "val": [2025], "test": [2026]}
 SPLITS = ["train", "val", "test"]
 
 # --------------------------------------------------------------------------- #
-# Target: ten arrival outcome bins (PROPOSAL_FLOW §2)
+# Target: ten arrival outcome bins
 # --------------------------------------------------------------------------- #
 
 # upper edges in minutes of arrival delay; the ninth bin (300+) is open
@@ -75,7 +72,7 @@ CLASS_NAMES = [
 ]
 
 # --------------------------------------------------------------------------- #
-# Variable groups (PROPOSAL_FLOW §3-1)
+# Variable groups
 # --------------------------------------------------------------------------- #
 
 # A-1: everything a passenger can see on the booking screen.
@@ -92,8 +89,6 @@ A1_INPUT = [
 ]
 
 # A-2: identifiers. Used to join and to split. Never model inputs.
-# Tail_Number in particular is NOT known at booking time; it is only used on
-# LAST year's rows, to rebuild that day's aircraft chain (step 3).
 A2_ID = ["FlightDate", "Flight_Number_Reporting_Airline", "Tail_Number"]
 
 # B: the outcome. Builds y_class. Never a model input.
@@ -113,10 +108,10 @@ CAUSE_COLUMNS = [
 ]
 
 # --------------------------------------------------------------------------- #
-# Model feature groups (step 10 decides which survive)
+# Model feature groups
 # --------------------------------------------------------------------------- #
 
-# The nine schedule features, derived from A-1 only.
+# The nine values the ticket itself shows, derived from A-1 only.
 BASE_FEATURES = [
     "Reporting_Airline",
     "Origin",
@@ -127,15 +122,6 @@ BASE_FEATURES = [
     "crs_arr_hour",
     "Distance",
     "CRSElapsedTime",
-]
-
-# The five report-card features from step 5, tested as a block in step 10.
-HISTORY_FEATURES = [
-    "A_absorb_rate",
-    "B1_turnaround_mean",
-    "B2_day_seq_mean",
-    "B3_first_flight_rate",
-    "C_bad_day_rel_fail",
 ]
 
 # Three features derived from the published timetable and last year's public
@@ -153,7 +139,7 @@ MODEL_FEATURES = BASE_FEATURES + SCHEDULE_FEATURES
 SCENARIO_FEATURES = ["scen_origin", "scen_dest"]
 
 # --------------------------------------------------------------------------- #
-# Scenario types (PROPOSAL_FLOW §3-2 ⑥)
+# Scenario types
 # --------------------------------------------------------------------------- #
 
 SCENARIO_NAMES = ["정상일", "항공사귀책일", "연결편붕괴일", "공역혼잡일", "날씨일"]
@@ -163,7 +149,6 @@ SCENARIO_MIN_FLIGHTS = 20     # a day with fewer flights cannot characterise an 
 # Other settings decided by EDA (step 8) and read back by later steps
 # --------------------------------------------------------------------------- #
 
-BAD_DAY_QUANTILE = 0.90       # "bad day" = top 10% within airport x year
 EDA_SETTINGS_PATH = RESULTS_DIR / "step08_settings.json"
 
 
@@ -188,8 +173,7 @@ def set_seeds(seed: int = SEED) -> None:
 def ensure_dirs() -> None:
     """Create every output directory the pipeline writes into."""
     for path in (
-        CLEAN_DIR, LEGS_DIR, AIRPORT_DAY_DIR, HISTORY_DIR,
-        SCHEDULE_DIR, SCENARIO_DIR,
+        CLEAN_DIR, SCHEDULE_DIR, SCENARIO_DIR,
         DATASET_DIR, PREP_DIR, MODEL_DIR, RESULTS_DIR, FIGURE_DIR,
     ):
         path.mkdir(parents=True, exist_ok=True)

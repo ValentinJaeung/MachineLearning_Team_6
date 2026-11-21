@@ -1,8 +1,7 @@
 """
 Step 8 - EDA: fix the settings the later steps need, and describe the structure.
-(PROPOSAL_FLOW §4, 8단계)
 
-Reads  data/dataset/ (step 7), data/clean/ (step 2), data/airport_day/ (step 4)
+Reads  data/dataset/ (step 7), data/clean/ (step 2)
 Writes results/step08_settings.json      <- the four settings, with their evidence
        results/step08_*.csv
        figures/step08_*.png              (nine figures)
@@ -18,17 +17,10 @@ Two jobs, two viewing ranges
    statistics of post-hoc fields and feeds no setting and no feature choice.
    Its role stops at "what is worth checking".
 
-The four settings fixed here
-----------------------------
-  smoothing k            estimated by empirical Bayes in step 5; reproduced
-                         here with its evidence (the per-key observation
-                         counts that make smoothing necessary at all)
+The setting fixed here
+----------------------
   one-hot airport count  smallest N whose cumulative share of training
                          departures reaches 95%
-  bad-day rule           relative quantile within airport x year, justified by
-                         how far apart the per-airport thresholds actually are
-  report-card join       narrow -> wide fallback, justified by the match rate
-                         each key width achieves on its own
 
 Usage:  python src/step08_eda.py
 """
@@ -188,105 +180,6 @@ def figure_hour_profile(train: pd.DataFrame) -> dict:
             "worst_hour": int(worst["crs_dep_hour"]),
             "guaranteed_90_best_min": float(best["guaranteed_90_min"]),
             "guaranteed_90_worst_min": float(worst["guaranteed_90_min"])}
-
-
-# --------------------------------------------------------------------------- #
-# 3. airport-day delay spread  (why "bad day" must be relative)
-# --------------------------------------------------------------------------- #
-
-
-def figure_airport_day(airport_day: pd.DataFrame) -> dict:
-    train_days = airport_day[airport_day["year"].isin(TRAIN_YEARS)]
-    busiest = (train_days.groupby("Origin")["n_flights"].sum()
-               .sort_values(ascending=False).head(8).index.tolist())
-
-    fig, axes = plt.subplots(1, 2, figsize=(13.5, 5))
-    data = [train_days.loc[train_days["Origin"] == a, "mean_dep_delay"].dropna()
-            for a in busiest]
-    axes[0].boxplot(data, tick_labels=busiest, showfliers=False)
-    thresholds = [train_days.loc[train_days["Origin"] == a,
-                                 "threshold_p90"].mean() for a in busiest]
-    axes[0].plot(range(1, len(busiest) + 1), thresholds, "r*", ms=13,
-                 label="공항별 p90 임계값")
-    axes[0].set_ylabel("그날 그 공항의 평균 출발 지연(분)")
-    axes[0].set_title("공항마다 '나쁜 날'의 기준이 다르다")
-    axes[0].legend(fontsize=9)
-
-    spread = (train_days.groupby(["Origin", "year"])["threshold_p90"].first()
-              .dropna())
-    axes[1].hist(spread, bins=60, color="#4c6ef5")
-    axes[1].axvline(spread.median(), color="#c92a2a", ls="--",
-                    label=f"중앙값 {spread.median():.1f}분")
-    axes[1].set_xlabel("공항-연도별 p90 임계값(분)")
-    axes[1].set_ylabel("공항-연도 수")
-    axes[1].set_title(f"임계값 분포 — {spread.min():.0f}분 ~ {spread.max():.0f}분")
-    axes[1].legend(fontsize=9)
-    fig.tight_layout()
-    fig.savefig(config.FIGURE_DIR / "step08_airport_day_delay.png")
-    plt.close(fig)
-
-    print("\n=== 나쁜 날 기준 ===")
-    print(f"  공항-연도별 p90 임계값이 {spread.min():.1f}분 ~ {spread.max():.1f}분"
-          f" (중앙값 {spread.median():.1f}분)으로 흩어진다.")
-    print("  '30분 넘으면 나쁜 날' 같은 절대 기준을 쓰면 붐비는 공항은 1년의 "
-          "절반이 나쁜 날이 되고, 그 변수는 '그날이 나빴나'가 아니라 "
-          "'이 공항이 붐비나'를 재게 된다 → 공항·연도 상대 분위를 쓴다.")
-    return {"threshold_min": float(spread.min()),
-            "threshold_median": float(spread.median()),
-            "threshold_max": float(spread.max())}
-
-
-# --------------------------------------------------------------------------- #
-# 4. key match rates and per-key observation counts
-# --------------------------------------------------------------------------- #
-
-
-def figure_key_match(train: pd.DataFrame) -> dict:
-    share = (train["substitute_level"].value_counts(normalize=True)
-             .reindex(range(4), fill_value=0))
-    names = ["flight_key\n(가장 좁음)", "route_key", "group_key",
-             "전체 평균\n(마지막 수단)"]
-
-    history = pd.concat([
-        pd.read_parquet(config.HISTORY_DIR / f"history_{y}_flight.parquet",
-                        columns=["n_absorb", "n_bad"])
-        for y in TRAIN_YEARS], ignore_index=True)
-
-    fig, axes = plt.subplots(1, 2, figsize=(13.5, 4.8))
-    axes[0].bar(names, share.to_numpy(), color=["#2b8a3e", "#4c6ef5",
-                                                "#f59f00", "#c92a2a"])
-    for i, v in enumerate(share.to_numpy()):
-        axes[0].text(i, v + 0.012, f"{v:.1%}", ha="center", fontsize=10)
-    axes[0].set_ylim(0, 0.85)
-    axes[0].set_ylabel("train 행 비중")
-    axes[0].set_title("성적표를 몇 번째 이름표에서 찾았나")
-
-    bins = np.arange(0, 21) - 0.5
-    axes[1].hist(history["n_bad"].clip(upper=20), bins=bins, alpha=0.75,
-                 color="#4c6ef5", label="나쁜 날 관측 횟수 (C)")
-    axes[1].hist(history["n_absorb"].clip(upper=20), bins=bins, alpha=0.6,
-                 color="#e8590c", label="흡수 판정 횟수 (A)")
-    axes[1].set_xlabel("flight_key 당 관측 횟수 (20에서 절단)")
-    axes[1].set_ylabel("flight_key 수")
-    axes[1].set_title("관측이 1~2회뿐인 편이 많다 → 평활이 필요하다")
-    axes[1].legend(fontsize=9)
-    fig.tight_layout()
-    fig.savefig(config.FIGURE_DIR / "step08_key_match.png")
-    plt.close(fig)
-
-    print("\n=== 성적표 조인 키 ===")
-    for i, name in enumerate(["flight_key", "route_key", "group_key", "global"]):
-        print(f"  {name:<11} {share.iloc[i]:6.1%}")
-    print(f"  flight_key 만으로는 {share.iloc[0]:.0%}밖에 못 찾는다. "
-          "편명은 해마다 다른 노선에 재배정되는 번호표이기 때문이다.")
-    print(f"  flight_key 당 나쁜 날 관측 중앙값 {history['n_bad'].median():.0f}회 — "
-          "한 번 던진 동전으로 '완벽한 편/최악의 편'이 정해지면 안 된다.")
-    return {"level0_flight": float(share.iloc[0]), "level1_route": float(share.iloc[1]),
-            "level2_group": float(share.iloc[2]), "level3_global": float(share.iloc[3]),
-            "median_n_bad_per_flight_key": float(history["n_bad"].median()),
-            "median_n_absorb_per_flight_key": float(history["n_absorb"].median())}
-
-
 # --------------------------------------------------------------------------- #
 # 5. how many airports to one-hot
 # --------------------------------------------------------------------------- #
@@ -506,9 +399,8 @@ def main() -> int:
 
     train = load_train([
         "y_class", "crs_dep_hour", "crs_arr_hour", "Distance", "CRSElapsedTime",
-        "Origin", "Dest", "FlightDate", "substitute_level"]
+        "Origin", "Dest", "FlightDate"]
         + config.SCHEDULE_FEATURES)
-    airport_day = pd.read_parquet(config.AIRPORT_DAY_DIR / "airport_day.parquet")
 
     print(f"train rows: {len(train):,}  (years {TRAIN_YEARS})")
     print("설정값은 학습 연도만 보고 정한다. val 2025 · test 2026 은 열지 않는다.")
@@ -520,15 +412,6 @@ def main() -> int:
         },
         "target_distribution": figure_class_distribution(train),
         "departure_hour": figure_hour_profile(train),
-        "bad_day_rule": {
-            "method": "airport x year relative quantile",
-            "quantile": config.BAD_DAY_QUANTILE,
-            **figure_airport_day(airport_day),
-        },
-        "report_card_join": {
-            "method": "flight_key -> route_key -> group_key -> global mean",
-            **figure_key_match(train),
-        },
         "one_hot_airports": figure_onehot_cutoff(train),
         "correlation": figure_correlation(train),
         "single_feature_spread": figure_feature_vs_target(train),
@@ -536,22 +419,12 @@ def main() -> int:
         "cause_mix": figure_cause_mix(),
     }
 
-    k = json.loads((config.RESULTS_DIR / "step05_smoothing_k.json")
-                   .read_text(encoding="utf-8"))
-    settings["smoothing_k"] = {
-        "method": "empirical Bayes, estimated on the training source years",
-        "k_A": k["A_absorb_rate"]["k"], "k_C": k["C_bad_day_rel_fail"]["k"],
-    }
-
     config.EDA_SETTINGS_PATH.write_text(
         json.dumps(settings, indent=2, ensure_ascii=False), encoding="utf-8")
-    print(f"\n=== 8단계 확정 설정값 ===")
-    print(f"  평활 k        A {settings['smoothing_k']['k_A']:.2f} / "
-          f"C {settings['smoothing_k']['k_C']:.2f}   (경험적 베이즈)")
-    print(f"  원-핫 공항     상위 {settings['one_hot_airports']['n_onehot']}개")
-    print(f"  나쁜 날 기준   공항·연도 상위 {1 - config.BAD_DAY_QUANTILE:.0%}")
-    print(f"  성적표 조인    flight → route → group → 전체 평균 (계층 축소)")
-    print(f"  네 개 모두 데이터를 보고 정했다. 임의로 고른 숫자는 없다.")
+    print("\n=== 8단계 확정 설정값 ===")
+    print(f"  원-핫 공항     상위 {settings['one_hot_airports']['n_onehot']}개 "
+          f"(학습 연도 누적 운항 95% 지점)")
+    print("  데이터를 봐서 정했다. 임의로 고른 숫자는 없다.")
     print(f"\nsettings: {config.EDA_SETTINGS_PATH}")
     return 0
 

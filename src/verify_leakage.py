@@ -17,7 +17,8 @@ Groups
   C  fit-on-train  the imputation median and the standardisation statistics
                    equal the values recomputed from train alone
   D  target        y_class is inside 0..9 and agrees with arr_delay_min
-  E  report card   year Y's features came from year Y-1 and nothing else
+  E  look-back     sched_pad depends only on the route and the scheduled time,
+                   never on the flight's own outcome
   F  vocabulary    one-hot columns only use categories seen in train
 
 Usage:  python src/verify_leakage.py
@@ -127,22 +128,23 @@ def main() -> int:
               bool((rebuilt == values[~never]).all()))
 
     # ---------------------------------------------------------------- E --- #
-    print("\nE. report card uses year Y-1 only")
-    summary = pd.read_csv(config.RESULTS_DIR / "step05_history_summary.csv")
-    check("E", "every target year was built from the year before it",
-          bool((summary["target_year"] - summary["source_year"] == 1).all()),
-          f"{len(summary)} years")
+    print("\nE. sched_pad looks back, never sideways")
+    # sched_pad = CRSElapsedTime - (last year's median actual on this route).
+    # Nothing in it varies with the flight itself, so two flights that share a
+    # route, a year and a scheduled block time must carry the SAME value. If
+    # this year's own outcomes had leaked in, the values would differ.
     for s in config.SPLITS:
-        levels = meta[s]["substitute_level"]
-        check("E", f"{s}: substitute_level fully assigned, 0..3",
-              bool(levels.between(0, 3).all()),
-              f"L0={float((levels == 0).mean()):.1%} "
-              f"L3={float((levels == 3).mean()):.1%}")
-    k = json.loads((config.RESULTS_DIR / "step05_smoothing_k.json")
-                   .read_text(encoding="utf-8"))
-    check("E", "smoothing k was estimated on the training source years only",
-          k["estimated_on"] == [2021, 2022, 2023],
-          f"k_A={k['A_absorb_rate']['k']:.2f} k_C={k['C_bad_day_rel_fail']['k']:.2f}")
+        frame = pd.DataFrame({
+            "route": meta[s]["route_key"].to_numpy(),
+            "year": meta[s]["Year"].to_numpy(),
+            "crs": xgb[s]["CRSElapsedTime"].to_numpy(),
+            "pad": xgb[s]["sched_pad"].to_numpy(),
+        })
+        spread = (frame.groupby(["route", "year", "crs"], observed=True)["pad"]
+                  .nunique())
+        check("E", f"{s}: sched_pad is one value per route-year-schedule",
+              bool((spread == 1).all()),
+              f"{len(spread):,} groups, max distinct {int(spread.max())}")
 
     # ---------------------------------------------------------------- F --- #
     print("\nF. vocabulary")

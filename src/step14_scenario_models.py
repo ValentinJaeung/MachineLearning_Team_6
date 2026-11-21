@@ -1,6 +1,5 @@
 """
 Step 14 - conditioning on the kind of day: the what-if panel and the ceiling.
-(PROPOSAL_FLOW §4, 14단계)
 
 Reads  data/prep/ (step 9), data/model/ (step 11)
 Writes data/model/xgboost_scenario.json, scenario_type_{origin,dest}.json

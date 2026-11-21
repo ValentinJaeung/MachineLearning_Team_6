@@ -1,5 +1,5 @@
 """
-Step 1 - data collection (PROPOSAL_FLOW §4, 1단계).
+Step 1 - data collection.
 
 Downloads the BTS "Reporting Carrier On-Time Performance (1987-present)"
 monthly files for June/July/August 2021-2026 (18 months), keeps the 40 source
@@ -14,10 +14,11 @@ one axis - the year - is left free.
 
 Why 2021 is downloaded but never trained on
 -------------------------------------------
-Each year's "report card" features (step 5) are built from the PREVIOUS year
-only. 2022 is the first training year, so 2021 is needed as its source.
+sched_pad (step 3) compares the scheduled block time with the PREVIOUS
+year's actual median on that route. 2022 is the first training year, so 2021
+is needed as its source and nothing else.
 
-The 40 columns cover all four variable groups of PROPOSAL_FLOW §3-1:
+The 40 columns cover all four variable groups in src/config.py:
 A-1 booking-time inputs, A-2 identifiers, B outcomes, C post-hoc detail.
 Which of them a model may see is decided in src/config.py, not here.
 

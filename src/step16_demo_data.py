@@ -1,6 +1,5 @@
 """
 Step 16 - pre-computed data for the demo page.
-(PROPOSAL_FLOW §4, 16단계)
 
 Reads  data/prep/ (step 9), data/model/ (steps 11, 12, 14)
 Writes data/model/demo_data.json

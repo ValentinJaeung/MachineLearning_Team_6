@@ -46,10 +46,11 @@ import pandas as pd
 import config
 
 TARGET = "y_class"
-FEATURE_COLUMNS = config.BASE_FEATURES + config.HISTORY_FEATURES   # 14
+FEATURE_COLUMNS = config.MODEL_FEATURES + config.HISTORY_FEATURES   # 12 + 5
 
 SCENARIO_COLUMNS = ["scen_origin", "scen_dest",
                     "scen_origin_applied", "scen_dest_applied"]
+SCHEDULE_EXTRA = ["pad_level"]       # carried for auditing, not an input
 
 # carried through, never offered to a model
 META_COLUMNS = [
@@ -78,23 +79,24 @@ class Stop(Exception):
 
 
 def load_year(year: int) -> pd.DataFrame:
-    clean, scen = [], []
+    clean, sched, scen = [], [], []
     for month in config.MONTHS:
         cpath = config.CLEAN_DIR / f"{year}_{month:02d}.parquet"
+        dpath = config.SCHEDULE_DIR / f"{year}_{month:02d}.parquet"
         spath = config.SCENARIO_DIR / f"{year}_{month:02d}.parquet"
-        if not cpath.exists():
-            raise Stop(f"Missing step 2 output: {cpath}")
-        if not spath.exists():
-            raise Stop(f"Missing step 6 output: {spath}")
+        for path, step in ((cpath, 2), (dpath, 3), (spath, 6)):
+            if not path.exists():
+                raise Stop(f"Missing step {step} output: {path}")
         c = pd.read_parquet(cpath, columns=CLEAN_COLUMNS)
+        d = pd.read_parquet(dpath)
         s = pd.read_parquet(spath)
-        if len(c) != len(s):
-            raise Stop(f"{year}-{month:02d}: clean {len(c):,} vs scenario {len(s):,}")
-        clean.append(c)
-        scen.append(s)
-    frame = pd.concat(clean, ignore_index=True)
-    scenario = pd.concat(scen, ignore_index=True)
-    return pd.concat([frame, scenario], axis=1)
+        if not len(c) == len(d) == len(s):
+            raise Stop(f"{year}-{month:02d}: clean {len(c):,} / schedule {len(d):,}"
+                       f" / scenario {len(s):,} row counts differ")
+        clean.append(c); sched.append(d); scen.append(s)
+    return pd.concat([pd.concat(clean, ignore_index=True),
+                      pd.concat(sched, ignore_index=True),
+                      pd.concat(scen, ignore_index=True)], axis=1)
 
 
 def join_year(year: int) -> tuple[pd.DataFrame, dict]:
@@ -150,7 +152,8 @@ def join_year(year: int) -> tuple[pd.DataFrame, dict]:
     if int((frame["substitute_level"] < 0).sum()):
         raise Stop(f"Some rows were left unassigned in {year}")
 
-    frame = frame[FEATURE_COLUMNS + SCENARIO_COLUMNS + [TARGET] + META_COLUMNS]
+    frame = frame[FEATURE_COLUMNS + SCENARIO_COLUMNS + SCHEDULE_EXTRA
+                  + [TARGET] + META_COLUMNS]
 
     info = {
         "year": year, "rows": rows,
@@ -205,8 +208,8 @@ def main() -> int:
                  .sort_index())
         print(f"{split:<5} " + "  ".join(f"L{i}={v:.1%}" for i, v in share.items()))
 
-    print(f"\n=== Columns ===\nfeatures ({len(FEATURE_COLUMNS)}): {FEATURE_COLUMNS}")
-    print(f"scenario (tested in step 10): {SCENARIO_COLUMNS}")
+    print(f"\n=== Columns ===\n모델 입력 ({len(config.MODEL_FEATURES)}): {config.MODEL_FEATURES}")
+    print(f"시나리오(14단계 모델 B 전용): {SCENARIO_COLUMNS}")
     print(f"target: {TARGET}\nmeta (never a model input): {META_COLUMNS}")
 
     print("\n=== Nulls in feature columns ===")

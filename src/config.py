@@ -38,6 +38,7 @@ CLEAN_DIR = DATA_DIR / "clean"         # step 2  - times, keys, y_class
 LEGS_DIR = DATA_DIR / "legs"           # step 3  - same-aircraft chaining
 AIRPORT_DAY_DIR = DATA_DIR / "airport_day"   # step 4
 HISTORY_DIR = DATA_DIR / "history"     # step 5  - last year's report card
+SCHEDULE_DIR = DATA_DIR / "schedule"   # step 3  - timetable-derived features
 SCENARIO_DIR = DATA_DIR / "scenario"   # step 6  - airport-day type
 DATASET_DIR = DATA_DIR / "dataset"     # step 7  - one table, split by year
 PREP_DIR = DATA_DIR / "prep"           # step 9  - two design matrices
@@ -136,7 +137,18 @@ HISTORY_FEATURES = [
     "C_bad_day_rel_fail",
 ]
 
-# The two scenario columns, tested in step 10 and used by model B in step 14.
+# Three features derived from the published timetable and last year's public
+# record (step 3). Each carries information the nine above cannot rebuild.
+SCHEDULE_FEATURES = [
+    "sched_pad",                 # scheduled block time minus last year's actual
+    "dest_arr_load",             # arrivals scheduled into this airport-hour
+    "days_to_nearest_holiday",   # signed days, clipped to +/-21
+]
+
+# The twelve inputs the reported model uses.
+MODEL_FEATURES = BASE_FEATURES + SCHEDULE_FEATURES
+
+# The two scenario columns, used by model B in step 14. Not known at booking.
 SCENARIO_FEATURES = ["scen_origin", "scen_dest"]
 
 # --------------------------------------------------------------------------- #
@@ -175,7 +187,8 @@ def set_seeds(seed: int = SEED) -> None:
 def ensure_dirs() -> None:
     """Create every output directory the pipeline writes into."""
     for path in (
-        CLEAN_DIR, LEGS_DIR, AIRPORT_DAY_DIR, HISTORY_DIR, SCENARIO_DIR,
+        CLEAN_DIR, LEGS_DIR, AIRPORT_DAY_DIR, HISTORY_DIR,
+        SCHEDULE_DIR, SCENARIO_DIR,
         DATASET_DIR, PREP_DIR, MODEL_DIR, RESULTS_DIR, FIGURE_DIR,
     ):
         path.mkdir(parents=True, exist_ok=True)

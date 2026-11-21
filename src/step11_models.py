@@ -62,26 +62,9 @@ def say(message: str) -> None:
 
 
 def chosen_features() -> list[str]:
-    """The feature blocks step 10 adopted (dropped ones are returned)."""
-    path = config.RESULTS_DIR / "step10_gate.csv"
-    if not path.exists():
-        raise SystemExit("Run src/step10_feature_selection.py first")
-    gate = pd.read_csv(path)
-    passed = gate[(gate["verdict"] == "통과") & (gate["deployable"] == "예")]
-    if passed.empty:
-        drop = config.HISTORY_FEATURES
-        note = "step 10 adopted no extra block: the nine schedule features only"
-    else:
-        best = passed.sort_values("gain_vs_baseline", ascending=False).iloc[0]
-        keep = {"기본 + A 흡수율": ["A_absorb_rate"],
-                "기본 + B 연결편 3종": ["B1_turnaround_mean", "B2_day_seq_mean",
-                                   "B3_first_flight_rate"],
-                "기본 + C 나쁜 날 상대실패": ["C_bad_day_rel_fail"],
-                "기본 + A·B·C 전부": config.HISTORY_FEATURES}[best["block"]]
-        drop = [f for f in config.HISTORY_FEATURES if f not in keep]
-        note = f"step 10 adopted: {best['block']}"
-    print(f"[step 10] {note}")
-    print(f"[step 10] dropped from the matrices: {drop or 'nothing'}")
+    """Columns removed from both encodings so the model sees the 12 inputs."""
+    drop = [c for c in config.HISTORY_FEATURES]
+    print(f"[입력] {len(config.MODEL_FEATURES)}개: {config.MODEL_FEATURES}")
     return drop
 
 

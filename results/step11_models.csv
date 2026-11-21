@@ -1,4 +1,0 @@
-﻿model,log_loss,brier,cdf_ece,coverage_90,coverage_90_share,auc_late,fit_seconds,best_iteration,train_mlogloss,iterations,converged,best_epoch
-M2 XGBoost,1.40096,0.61156,0.0082,0.9155,0.9816,0.70207,1087.3,279.0,1.34258,,,
-M1 로지스틱,1.40816,0.6146,0.00909,0.914,0.9859,0.69339,123.2,,,120.0,False,
-M3 MLP,1.39872,0.61038,0.00804,0.9155,0.9812,0.70246,820.3,,,,,6.0

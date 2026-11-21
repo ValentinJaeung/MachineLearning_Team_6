@@ -50,12 +50,12 @@
   },
   "single_feature_spread": {
     "spread": {
-      "C_bad_day_rel_fail": 0.1474,
-      "B2_day_seq_mean": 0.1254,
-      "A_absorb_rate": 0.1237,
-      "B3_first_flight_rate": 0.1128,
+      "crs_dep_hour": 0.3148,
+      "sched_pad": 0.0845,
+      "days_to_nearest_holiday": 0.0762,
       "Distance": 0.0751,
-      "B1_turnaround_mean": 0.0589
+      "CRSElapsedTime": 0.0513,
+      "dest_arr_load": 0.0461
     }
   },
   "candidates_per_day": {

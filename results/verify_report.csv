@@ -11,11 +11,14 @@ A,"test: every file has 1,847,936 rows",PASS,
 B,train: xgb matrix has no outcome/post-hoc/id column,PASS,14 features only
 B,val: xgb matrix has no outcome/post-hoc/id column,PASS,14 features only
 B,test: xgb matrix has no outcome/post-hoc/id column,PASS,14 features only
-B,linear matrix column names contain no banned field,PASS,357 columns
-B,xgb feature list is exactly the 14 agreed features,PASS,14 columns
+B,linear matrix column names contain no banned field,PASS,360 columns
+B,xgb feature list is exactly the 14 agreed features,PASS,17 columns
 B,scenario columns are stored apart from the feature matrices,PASS,
 C,Distance: median/mean/scale recomputed from train match,PASS,median=674.0000 mean=832.3831
 C,CRSElapsedTime: median/mean/scale recomputed from train match,PASS,median=127.0000 mean=144.3249
+C,sched_pad: median/mean/scale recomputed from train match,PASS,median=8.0000 mean=8.2472
+C,dest_arr_load: median/mean/scale recomputed from train match,PASS,median=17.0000 mean=22.7927
+C,days_to_nearest_holiday: median/mean/scale recomputed from train match,PASS,median=1.0000 mean=0.2978
 C,A_absorb_rate: median/mean/scale recomputed from train match,PASS,median=0.2351 mean=0.2621
 C,B1_turnaround_mean: median/mean/scale recomputed from train match,PASS,median=61.9006 mean=64.8415
 C,B2_day_seq_mean: median/mean/scale recomputed from train match,PASS,median=2.9490 mean=2.9449
@@ -39,4 +42,4 @@ F,val: no airline outside the train vocabulary,PASS,14 airlines
 F,test: no airline outside the train vocabulary,PASS,12 airlines
 F,"val: unseen airports fold into '기타', not a new column",PASS,368 categories
 F,"test: unseen airports fold into '기타', not a new column",PASS,368 categories
-F,linear matrix width is identical across splits,PASS,357 columns
+F,linear matrix width is identical across splits,PASS,360 columns

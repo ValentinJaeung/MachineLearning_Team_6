@@ -329,8 +329,8 @@ def figure_onehot_cutoff(train: pd.DataFrame) -> dict:
 
 
 def figure_correlation(train: pd.DataFrame) -> dict:
-    numeric = ["crs_dep_hour", "crs_arr_hour", "Distance", "CRSElapsedTime"] \
-        + config.HISTORY_FEATURES
+    numeric = (["crs_dep_hour", "crs_arr_hour", "Distance", "CRSElapsedTime"]
+               + config.SCHEDULE_FEATURES)
     corr = train[numeric].corr()
 
     fig, ax = plt.subplots(figsize=(7.6, 6.4))
@@ -365,7 +365,8 @@ def figure_correlation(train: pd.DataFrame) -> dict:
 
 
 def figure_feature_vs_target(train: pd.DataFrame) -> dict:
-    features = config.HISTORY_FEATURES + ["Distance"]
+    features = config.SCHEDULE_FEATURES + ["Distance", "CRSElapsedTime",
+                                           "crs_dep_hour"]
     fig, axes = plt.subplots(2, 3, figsize=(14, 7.6))
     rows = []
     for ax, name in zip(axes.ravel(), features):
@@ -503,7 +504,8 @@ def main() -> int:
 
     train = load_train([
         "y_class", "crs_dep_hour", "crs_arr_hour", "Distance", "CRSElapsedTime",
-        "Origin", "Dest", "FlightDate", "substitute_level"] + config.HISTORY_FEATURES)
+        "Origin", "Dest", "FlightDate", "substitute_level"]
+        + config.SCHEDULE_FEATURES)
     airport_day = pd.read_parquet(config.AIRPORT_DAY_DIR / "airport_day.parquet")
 
     print(f"train rows: {len(train):,}  (years {TRAIN_YEARS})")

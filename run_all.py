@@ -31,15 +31,16 @@ SRC = ROOT / "src"
 STEPS = [
     (1, "step01_download.py", "BTS 수집 (이미 받은 월은 건너뜀)", "5분 / 최초 40분"),
     (2, "step02_clean.py", "정제·시각 변환·이름표·10구간 라벨", "3분"),
-    (3, "archive/step03_legs.py", "[archive] 연결편 잇기", "3분"),
-    (4, "archive/step04_airport_day.py", "[archive] 공항-날짜 상태와 나쁜 날", "2분"),
-    (5, "archive/step05_history.py", "[archive] 키별 작년 성적표", "6분"),
+    (3, "step03_schedule_features.py", "시간표 파생 변수 3종", "4분"),
+    (None, "archive/step03_legs.py", "[archive] 연결편 잇기", "3분"),
+    (None, "archive/step04_airport_day.py", "[archive] 공항-날짜 상태와 나쁜 날", "2분"),
+    (None, "archive/step05_history.py", "[archive] 키별 작년 성적표", "6분"),
     (6, "step06_scenario.py", "그날의 유형 + PCA·군집 검증", "8분"),
     (7, "step07_dataset.py", "결합·연도 분할", "4분"),
     (8, "step08_eda.py", "EDA — 설정값 확정과 구조 기술", "5분"),
     (9, "step09_preprocess.py", "선형용·트리용 두 벌 전처리", "4분"),
-    (None, "verify_leakage.py", "누출 감사 41항목", "2분"),
-    (10, "archive/step10_feature_selection.py", "[archive] 변수 게이트 (기여로 판정)", "25분"),
+    (None, "verify_leakage.py", "누출 감사 44항목", "2분"),
+    (None, "archive/step10_feature_selection.py", "[archive] 변수 게이트 (기여로 판정)", "25분"),
     (11, "step11_models.py", "모델 3종 + 과적합·탐색", "90분"),
     (12, "step12_calibration.py", "확률 보정과 보정 구간 비교", "35분"),
     (13, "step13_explain.py", "SHAP + 시각 what-if", "10분"),
@@ -62,7 +63,8 @@ def main() -> int:
 
     print(f"{len(plan)} step(s) to run\n")
     for number, script, title, cost in plan:
-        tag = f"step {number:>2}" if number else "   audit"
+        tag = (f"step {number:>2}" if number
+               else (" archive" if title.startswith("[archive]") else "   audit"))
         print(f"  {tag}  {title:<40} ~{cost}")
     if args.dry_run:
         return 0

@@ -62,7 +62,8 @@ TARGET = "y_class"
 
 CATEGORICAL = ["Reporting_Airline", "Origin", "Dest", "DayOfWeek", "Month"]
 HOURS = ["crs_dep_hour", "crs_arr_hour"]
-NUMERIC = HOURS + ["Distance", "CRSElapsedTime"] + config.HISTORY_FEATURES
+NUMERIC = (HOURS + ["Distance", "CRSElapsedTime"]
+           + config.SCHEDULE_FEATURES + config.HISTORY_FEATURES)
 FEATURE_COLUMNS = CATEGORICAL + NUMERIC
 
 LINEAR_CATEGORICAL = CATEGORICAL + HOURS

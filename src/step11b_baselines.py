@@ -159,7 +159,7 @@ def main() -> int:
     if model_path.exists():
         models = pd.read_csv(model_path)
         best = models.sort_values("log_loss").iloc[0]
-        rows.append({"방법": f"모델 — {best['model']} (9변수)",
+        rows.append({"방법": f"모델 — {best['model']} ({len(config.MODEL_FEATURES)}변수)",
                      **{c: best[c] for c in
                         ("log_loss", "brier", "cdf_ece", "coverage_90",
                          "coverage_90_share", "auc_late") if c in models.columns}})

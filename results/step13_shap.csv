@@ -1,10 +1,13 @@
 ﻿feature,label,mean_abs_shap,method,passenger_can_change
-Reporting_Airline,항공사,0.212776,TreeSHAP (exact),True
-crs_dep_hour,출발 시각,0.194011,TreeSHAP (exact),True
-Origin,출발 공항,0.153082,TreeSHAP (exact),False
-Dest,도착 공항,0.136713,TreeSHAP (exact),False
-crs_arr_hour,도착 시각,0.098412,TreeSHAP (exact),False
-DayOfWeek,요일,0.061816,TreeSHAP (exact),True
-Month,월,0.059607,TreeSHAP (exact),False
-Distance,거리,0.031212,TreeSHAP (exact),False
-CRSElapsedTime,예정 비행시간,0.028136,TreeSHAP (exact),False
+Reporting_Airline,항공사,0.202681,TreeSHAP (exact),True
+crs_dep_hour,출발 시각,0.182537,TreeSHAP (exact),True
+Origin,출발 공항,0.139191,TreeSHAP (exact),False
+Dest,도착 공항,0.114036,TreeSHAP (exact),False
+crs_arr_hour,도착 시각,0.097131,TreeSHAP (exact),False
+days_to_nearest_holiday,days_to_nearest_holiday,0.08873,TreeSHAP (exact),False
+DayOfWeek,요일,0.050369,TreeSHAP (exact),True
+sched_pad,sched_pad,0.033334,TreeSHAP (exact),False
+Month,월,0.027492,TreeSHAP (exact),False
+dest_arr_load,dest_arr_load,0.01165,TreeSHAP (exact),False
+Distance,거리,0.009241,TreeSHAP (exact),False
+CRSElapsedTime,예정 비행시간,0.003909,TreeSHAP (exact),False

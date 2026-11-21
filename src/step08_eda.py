@@ -394,7 +394,8 @@ def figure_feature_vs_target(train: pd.DataFrame) -> dict:
                  index=False, encoding="utf-8-sig")
     print("\n=== 변수와 정답의 관계 (단독) ===")
     print(table.to_string(index=False, float_format=lambda v: f"{v:.4f}"))
-    print("  ⚠ 이것은 상관이지 기여가 아니다. 넣어서 좋아지는지는 10단계에서 판정한다.")
+    print("  ⚠ 이것은 상관이지 기여가 아니다. 단독으로 잘 가르는 변수여도 "
+          "이미 있는 변수가 같은 정보를 담고 있으면 보탬이 없다.")
     return {"spread": table.set_index("feature")[
         "ontime_spread_over_deciles"].round(4).to_dict()}
 
@@ -461,7 +462,8 @@ def figure_cause_mix() -> dict:
     print(f"  '연결편 지연'이 {overall_share['LateAircraftDelay']:.0%}를 차지한다 — "
           "③ 연결편 변수를 만든 근거가 여기 있다.")
     print("  ⚠ 전 기간을 본 기술이므로, 여기서 나온 관찰을 그대로 설계 근거로 "
-          "쓰지 않는다. 변수 채택은 10단계의 학습 연도 게이트에서만 결정한다.")
+          "쓰지 않는다. 입력 변수는 예약 시점 가용성과 기존 변수로 재구성되지 "
+          "않는지를 기준으로 고른다.")
     return {"overall_share": overall_share.round(4).to_dict()}
 
 

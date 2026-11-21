@@ -68,11 +68,15 @@ test    2026                   성적표는 2025 에서
 | 연결편 | 5 | `day_seq` `is_first_flight` `turnaround_min` `prev_delayed` `absorbed` |
 | 공항-날짜 | 4 | `n_flights` `mean_dep_delay` `fail_rate` `bad_day` |
 | 과거 이력(성적표) | 5 | `A_absorb_rate` `B1_turnaround_mean` `B2_day_seq_mean` `B3_first_flight_rate` `C_bad_day_rel_fail` |
-| 그날의 유형 | 2 | `scen_origin` `scen_dest` (5유형) |
+| ↑ 위 세 줄 | — | 기각됨. `src/archive/` 참조 |
+| **시간표 파생** | **3** | **`sched_pad` `dest_arr_load` `days_to_nearest_holiday`** ← 모델 입력 |
+| 그날의 유형 | 2 | `scen_origin` `scen_dest` (5유형, 14단계 모델 B 전용) |
 | 정답 | 1 | `y_class` (10구간) |
 
-**모델 입력 후보는 14개**(A-1 기반 9개 + 성적표 5개)이며, 실제로 몇 개가 살아남는지는
-10단계 게이트가 측정으로 결정합니다.
+**모델 입력은 12개**입니다 — A-1 에서 바로 오는 9개와, 공개 시간표·작년 공개 기록에서
+만든 3개(`sched_pad` · `dest_arr_load` · `days_to_nearest_holiday`)입니다.
+셋 모두 앞의 9개로는 재구성되지 않는다는 것이 선정 기준이었습니다.
+전처리 후 선형 설계행렬은 **355열**이 됩니다.
 
 ## 6. 정답 — 10구간
 
@@ -114,5 +118,5 @@ test    2026                   성적표는 2025 에서
 | 공개 데이터셋 | ✅ BTS, 퍼블릭 도메인 |
 | 출처·라이선스 명시 | ✅ 위 §1 |
 | 개인정보 데이터 금지 | ✅ 운항 단위 기록, 개인정보 없음 |
-| 피처 10개 이상 (전처리 후) | ✅ 모델 입력 후보 14개, 선형 설계행렬 357열 |
+| 피처 10개 이상 (전처리 후) | ✅ 모델 입력 12개, **선형 설계행렬 355열** |
 | 인스턴스 1,000개 이상 | ✅ 9,102,252행 |

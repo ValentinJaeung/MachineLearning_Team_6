@@ -51,10 +51,11 @@ FIGURE_DIR = PROJECT_ROOT / "figures"    # png, committed to git
 # Period and split
 # --------------------------------------------------------------------------- #
 
-YEARS = list(range(2021, 2027))        # 2021 is report-card material only
+YEARS = list(range(2021, 2027))        # 2021 is the Y-1 source for 2022 only
 MONTHS = (6, 7, 8)                     # summer only: one axis of variation
 
-# A year's report card is built from the PREVIOUS year only (PROPOSAL_FLOW §5).
+# Features that look back (step 3's sched_pad) read year Y-1 only, so 2021 is
+# downloaded but never split into train/val/test.
 SPLIT_YEARS = {"train": [2022, 2023, 2024], "val": [2025], "test": [2026]}
 SPLITS = ["train", "val", "test"]
 

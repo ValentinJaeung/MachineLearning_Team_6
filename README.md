@@ -69,7 +69,8 @@ python src/verify_leakage.py
 │   ├── plotting.py          한글 폰트 설정
 │   ├── step01_download.py   … step16_demo_data.py
 │   ├── step11b_baselines.py 모델이 필요한가 (베이스라인 4종)
-│   └── verify_leakage.py    누출 감사
+│   ├── verify_leakage.py    누출 감사
+│   └── archive/             시도했고 기각한 변수군 (보고서 대상 아님)
 ├── results/                 모든 수치 (CSV·JSON) — 보고서의 표는 전부 여기서 나옴
 ├── figures/                 그림
 └── data/                    .gitignore (재생성 가능)

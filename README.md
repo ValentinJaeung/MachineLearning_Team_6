@@ -207,6 +207,5 @@ python src/verify_leakage.py
 | 성능 지표 2개 이상 | ✅ log loss · Brier · CDF 보정오차 · 약속 이행률 · AUC |
 | 시각화 8개 이상 | ✅ **본문 14장** (목록과 선정 근거는 [`docs/REPORT.md`](docs/REPORT.md) 끝) |
 | 과적합 · 하이퍼파라미터 · 모델 선택 분석 | ✅ 11단계 (깊이별 과적합 곡선 · 탐색 7종 · 학습 곡선) + 다항 차수·규제 비교 |
-| 비지도 학습 (군집화 · 차원 축소) | ⚠️ 코드에는 있으나(`step06_scenario.py` PCA + k-means) **보고서 본문에서는 뺌** — 들어갈 자리를 정해야 함 |
 | 재현 코드 · README | ✅ `run_all.py` · 누출 감사 37항목 |
 | 생성형 AI 사용 내역 | ✅ [`docs/AI_USAGE.md`](docs/AI_USAGE.md) |

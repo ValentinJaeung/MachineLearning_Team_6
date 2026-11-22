@@ -55,10 +55,10 @@ def main() -> int:
 
     import xgboost as xgb_lib
 
-    test = common.load_split("test")
+    test = common.load_split("test", with_scenario=True)
     booster = xgb_lib.Booster()
-    booster.load_model(config.MODEL_DIR / "xgboost.json")
-    calibrator = joblib.load(config.MODEL_DIR / "production_calibrator.joblib")
+    booster.load_model(config.MODEL_DIR / "xgboost_scenario.json")
+    calibrator = joblib.load(config.MODEL_DIR / "conditional_calibrator.joblib")
 
     row = pick_example(test["meta"])
     raw = booster.predict(
@@ -68,8 +68,11 @@ def main() -> int:
 
     meta = test["meta"].iloc[row]
     xgb_row = test["X_xgb"].iloc[row]
+    assumed = config.SCENARIO_NAMES[int(xgb_row["scen_origin"])]
+    assumed_dest = config.SCENARIO_NAMES[int(xgb_row["scen_dest"])]
     title = (f"{meta['route_key']} · {str(meta['FlightDate'])[:10]} · "
-             f"{int(xgb_row['crs_dep_hour']):02d}시 출발")
+             f"{int(xgb_row['crs_dep_hour']):02d}시 출발 · "
+             f"가정: 출발지 {assumed} / 도착지 {assumed_dest}")
 
     edges = np.asarray(config.EDGES, dtype="float64")
     cdf = probs.cumsum()[:len(config.EDGES)]
@@ -100,7 +103,8 @@ def main() -> int:
     ax_cdf.plot(edges, cdf, "o-", color="#1c7ed6", lw=2)
     record = {"route": str(meta["route_key"]),
               "date": str(meta["FlightDate"])[:10],
-              "crs_dep_hour": int(xgb_row["crs_dep_hour"])}
+              "crs_dep_hour": int(xgb_row["crs_dep_hour"]),
+              "assumed_origin": assumed, "assumed_dest": assumed_dest}
     for level in LEVELS:
         minutes = float(common.guaranteed_minutes(probs[None, :], level)[0])
         record[f"guarantee_{int(level * 100)}"] = minutes
@@ -128,8 +132,8 @@ def main() -> int:
     ax_cdf.set_xlim(0, edges[-1] * 1.02)
     ax_cdf.grid(alpha=0.25)
 
-    fig.suptitle(f"출력 하나에서 서비스 화면 전부가 나온다 — {title} "
-                 "(test 2026, 보정 후)", fontsize=12.5)
+    fig.suptitle("가정 하나로 답이 정해진다 — " + title
+                 + chr(10) + "(test 2026, 보정 후)", fontsize=11.5)
     fig.tight_layout()
     fig.savefig(config.FIGURE_DIR / "method_guarantee.png")
     plt.close(fig)

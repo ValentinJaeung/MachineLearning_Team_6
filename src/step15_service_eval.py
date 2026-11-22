@@ -114,10 +114,24 @@ def main() -> int:
     drop = json.loads((config.MODEL_DIR / "chosen.json")
                       .read_text(encoding="utf-8"))["dropped_features"]
     print("=== test 2026 를 여는 유일한 지점 ===")
-    test = common.load_split("test", drop=drop)
+    print("서비스가 답하는 방식 그대로 — 가정한 날 유형을 입력으로 넣는다.")
+    test = common.load_split("test", drop=drop, with_scenario=True)
     booster = xgb.Booster()
-    booster.load_model(config.MODEL_DIR / "xgboost.json")
-    calibrator = joblib.load(config.MODEL_DIR / "production_calibrator.joblib")
+    booster.load_model(config.MODEL_DIR / "xgboost_scenario.json")
+
+    # the calibrator is fitted the same way the answer is given: on val 2025,
+    # with the assumed type equal to that day's type.
+    cal_path = config.MODEL_DIR / "conditional_calibrator.joblib"
+    if cal_path.exists():
+        calibrator = joblib.load(cal_path)
+    else:
+        print("  보정기를 val 2025 에서 적합 ...")
+        val = common.load_split("val", drop=drop, with_scenario=True)
+        raw_val = booster.predict(
+            xgb.DMatrix(val["X_xgb"], enable_categorical=True)).astype("float64")
+        calibrator = common.CdfCalibrator().fit(raw_val, val["cls"], val["delay"])
+        joblib.dump(calibrator, cal_path)
+        del val, raw_val
 
     raw = booster.predict(xgb.DMatrix(test["X_xgb"], enable_categorical=True)
                           ).astype("float64")
@@ -181,6 +195,8 @@ def main() -> int:
         "airline": meta["Reporting_Airline"],
         "airport_size": size_band,
         "month": pd.to_datetime(meta["FlightDate"]).dt.month.astype(str) + "월",
+        "assumed_type": test["X_xgb"]["scen_origin"].astype(int)
+        .map(dict(enumerate(config.SCENARIO_NAMES))),
     }
     print("\n=== 90% 약속의 약한 곳 ===")
     for name, series in groups.items():

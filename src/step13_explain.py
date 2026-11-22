@@ -1,7 +1,7 @@
 """
 Step 13 - what the model looks at, and what the passenger can actually change.
 
-Reads  data/model/xgboost.json (step 11), data/prep/ (step 9)
+Reads  data/model/xgboost_scenario.json (step 14), data/prep/ (step 9)
 Writes results/step13_shap.csv, results/step13_whatif_hour.csv
        figures/step13_shap.png, figures/step13_whatif_hour.png
 
@@ -66,8 +66,8 @@ def main() -> int:
     drop = json.loads((config.MODEL_DIR / "chosen.json")
                       .read_text(encoding="utf-8"))["dropped_features"]
     booster = xgb.Booster()
-    booster.load_model(config.MODEL_DIR / "xgboost.json")
-    val = common.load_split("val", drop=drop)
+    booster.load_model(config.MODEL_DIR / "xgboost_scenario.json")
+    val = common.load_split("val", drop=drop, with_scenario=True)
     rng = np.random.default_rng(config.SEED)
 
     # ------------------------------------------------------------------ #

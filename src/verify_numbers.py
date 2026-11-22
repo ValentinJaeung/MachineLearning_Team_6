@@ -63,6 +63,7 @@ import config
 
 ROOT = Path(__file__).resolve().parent.parent
 DOCS = [ROOT / "docs" / "REPORT.md",
+        ROOT / "docs" / "REPORT_DRAFT.md",
         ROOT / "docs" / "REPORT_OUTLINE.md",
         ROOT / "README.md"]
 

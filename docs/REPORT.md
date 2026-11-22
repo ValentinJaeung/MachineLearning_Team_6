@@ -631,7 +631,8 @@ val 2025**에서 만들었다.
 
 ### 5.5 요구 신뢰도 변화에 따른 출발시간 차이
 
-**할 말** — 80% → 95%로 올리면 출발이 **166분 앞당겨진다**(602 → 436분).
+**할 말** — 80% → 95%로 올리면 출발이 **165분 앞당겨진다**(601.5 → 436.3분).
+반올림한 값끼리 빼지 않는다 — 602 − 436 = 166 은 1분을 만들어 낸 숫자다.
 **"확실함의 가격"을 시간으로 보여주는 화면**이고, 다른 어떤 서비스도 하지 않는 일이다.
 
 ---
@@ -752,7 +753,7 @@ val 2025**에서 만들었다.
 | | 내용 |
 |---|---|
 | A | 각 단계 스크립트 상단 docstring (무엇을 읽어 무엇을 쓰는지와 그 근거) |
-| B | **누출 감사 37항목 전문** (`results/verify_report.csv`) · **숫자 역추적 감사** (`results/verify_numbers.csv` — 본문·README의 숫자 142개가 어느 파일 어느 열에서 왔는지) |
+| B | **누출 감사 37항목 전문** (`results/verify_report.csv`) · **숫자 역추적 감사** (`results/verify_numbers.csv` — 본문·초안·README의 숫자 195개가 어느 파일 어느 열에서 왔는지) |
 | C | 본문 그림 18장 |
 | D | XGBoost 설정 13종 전량 (`results/step11g_xgb_full.csv`) · eta 짝지은 시드 비교 (`step11j_eta_seeds.csv`) |
 | E | 로지스틱 5종 수렴 기준 (`results/step11h_logistic_degrees.csv`) · MLP 5종과 시드 재적합 (`step11d_mlp_search.csv` · `step11f_mlp_seeds.csv`) · 채택 규칙 적용 (`step11i_verdict.csv` · `step11i_decision.csv`) |

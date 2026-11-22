@@ -113,22 +113,75 @@ REPORT.md,579,1.35803,직접,step15_metrics.csv · log_loss,| **보정 후** | 1
 REPORT.md,579,0.00574,직접,step15_metrics.csv · cdf_ece,| **보정 후** | 1.35803 | **0.00574** | 0.75143 |
 REPORT.md,579,0.75143,직접,step15_metrics.csv · auc_late,| **보정 후** | 1.35803 | **0.00574** | 0.75143 |
 REPORT.md,581,0.0028,차이,step15_metrics.csv · log_loss (1.35803 − 1.35524),**할 말** — CDF 보정오차는 **1.8배 개선**되고 log loss는 **오히려 0.0028 나빠진다.**
-REPORT.md,647,0.2142,직접,step13_shap.csv · mean_abs_shap,| 1 | **출발지의 그날 유형** | 0.2142 | ✅ 가정으로 입력 |
-REPORT.md,648,0.2096,직접,step13_shap.csv · mean_abs_shap,| 2 | **항공사** | 0.2096 | ✅ 고를 수 있음 |
-REPORT.md,649,0.1906,직접,step13_shap.csv · mean_abs_shap,| 3 | **도착지의 그날 유형** | 0.1906 | ✅ 가정으로 입력 |
-REPORT.md,650,0.1903,직접,step13_shap.csv · mean_abs_shap,| 4 | **출발 시각** | 0.1903 | ✅ 고를 수 있음 |
-REPORT.md,651,0.1571,직접,step13_shap.csv · mean_abs_shap,| 5 | 출발 공항 | 0.1571 | ❌ |
-REPORT.md,652,0.1256,직접,step13_shap.csv · mean_abs_shap,| 6 | 도착 공항 | 0.1256 | ❌ |
-REPORT.md,653,0.0895,직접,step13_shap.csv · mean_abs_shap,| 7 | 도착 시각 | 0.0895 | ❌ |
-REPORT.md,654,0.0383,직접,step13_shap.csv · mean_abs_shap,| 8 | 공휴일까지의 거리 | 0.0383 | ❌ |
-REPORT.md,696,0.0028,차이,step15_metrics.csv · log_loss (1.35803 − 1.35524),아니다. 우리는 후자를 선택했고 그 대가가 log loss 0.0028이다 (`step15_metrics.csv`).
-REPORT.md,707,0.00215,직접,step11i_verdict.csv · 차이,| **채택이 동점에서 갈렸다** | 채택 지표 차이 **0.00215** ≤ 임계값 **0.00265** | §4.4의 지표
-REPORT.md,707,0.00265,직접,step11i_verdict.csv · 사전선언 임계값,| **채택이 동점에서 갈렸다** | 채택 지표 차이 **0.00215** ≤ 임계값 **0.00265** | §4.4의 지표
-REPORT.md,708,0.00132,직접,step11i_summary.csv · cdf_ece_sd,| **MLP의 보정오차는 재현되지 않는다** | 시드 sd **0.00132** (트리의 **51배**) | 채택하지 않은 
-REPORT.md,713,0.00002,직접,step11h_logistic_degrees.csv · gained_by_converging,"> 수렴까지(124~315회) 돌렸고, 그렇게 얻은 것은 차수 1에서 **−0.00002**, 가장 많이"
-REPORT.md,714,0.00044,직접,step11h_logistic_degrees.csv · gained_by_converging,> 움직인 차수 3에서 **+0.00044**(더 나빠지는 쪽)였다. 차수 순위는 그대로다.
-REPORT.md,743,0.0060,직접,step11i_decision.csv · 알고리즘 3종 폭,"3. 모델을 더 만져서 얻은 것은 0.0060이었지만, **손님에게 그날을 한 번 물은 것이 0.0558**"
-REPORT.md,743,0.0558,직접,step11i_decision.csv · 하루 유형을 묻는 효과,"3. 모델을 더 만져서 얻은 것은 0.0060이었지만, **손님에게 그날을 한 번 물은 것이 0.0558**"
+REPORT.md,648,0.2142,직접,step13_shap.csv · mean_abs_shap,| 1 | **출발지의 그날 유형** | 0.2142 | ✅ 가정으로 입력 |
+REPORT.md,649,0.2096,직접,step13_shap.csv · mean_abs_shap,| 2 | **항공사** | 0.2096 | ✅ 고를 수 있음 |
+REPORT.md,650,0.1906,직접,step13_shap.csv · mean_abs_shap,| 3 | **도착지의 그날 유형** | 0.1906 | ✅ 가정으로 입력 |
+REPORT.md,651,0.1903,직접,step13_shap.csv · mean_abs_shap,| 4 | **출발 시각** | 0.1903 | ✅ 고를 수 있음 |
+REPORT.md,652,0.1571,직접,step13_shap.csv · mean_abs_shap,| 5 | 출발 공항 | 0.1571 | ❌ |
+REPORT.md,653,0.1256,직접,step13_shap.csv · mean_abs_shap,| 6 | 도착 공항 | 0.1256 | ❌ |
+REPORT.md,654,0.0895,직접,step13_shap.csv · mean_abs_shap,| 7 | 도착 시각 | 0.0895 | ❌ |
+REPORT.md,655,0.0383,직접,step13_shap.csv · mean_abs_shap,| 8 | 공휴일까지의 거리 | 0.0383 | ❌ |
+REPORT.md,697,0.0028,차이,step15_metrics.csv · log_loss (1.35803 − 1.35524),아니다. 우리는 후자를 선택했고 그 대가가 log loss 0.0028이다 (`step15_metrics.csv`).
+REPORT.md,708,0.00215,직접,step11i_verdict.csv · 차이,| **채택이 동점에서 갈렸다** | 채택 지표 차이 **0.00215** ≤ 임계값 **0.00265** | §4.4의 지표
+REPORT.md,708,0.00265,직접,step11i_verdict.csv · 사전선언 임계값,| **채택이 동점에서 갈렸다** | 채택 지표 차이 **0.00215** ≤ 임계값 **0.00265** | §4.4의 지표
+REPORT.md,709,0.00132,직접,step11i_summary.csv · cdf_ece_sd,| **MLP의 보정오차는 재현되지 않는다** | 시드 sd **0.00132** (트리의 **51배**) | 채택하지 않은 
+REPORT.md,714,0.00002,직접,step11h_logistic_degrees.csv · gained_by_converging,"> 수렴까지(124~315회) 돌렸고, 그렇게 얻은 것은 차수 1에서 **−0.00002**, 가장 많이"
+REPORT.md,715,0.00044,직접,step11h_logistic_degrees.csv · gained_by_converging,> 움직인 차수 3에서 **+0.00044**(더 나빠지는 쪽)였다. 차수 순위는 그대로다.
+REPORT.md,744,0.0060,직접,step11i_decision.csv · 알고리즘 3종 폭,"3. 모델을 더 만져서 얻은 것은 0.0060이었지만, **손님에게 그날을 한 번 물은 것이 0.0558**"
+REPORT.md,744,0.0558,직접,step11i_decision.csv · 하루 유형을 묻는 효과,"3. 모델을 더 만져서 얻은 것은 0.0060이었지만, **손님에게 그날을 한 번 물은 것이 0.0558**"
+REPORT_DRAFT.md,81,0.000152,직접,step11i_summary.csv · log_loss_sd,sd **0.000152** → 임계값 **0.000304**. 모델·지표마다 잡음 크기가 달라서 비교하는 칸마다
+REPORT_DRAFT.md,81,0.000304,배수,step11i_summary.csv · log_loss_sd (0.000152 × 2),sd **0.000152** → 임계값 **0.000304**. 모델·지표마다 잡음 크기가 달라서 비교하는 칸마다
+REPORT_DRAFT.md,94,1.40594,직접,step11i_summary.csv · log_loss,| 다항 로지스틱 | 1.40594 | 0.00753 | 0.69421 |
+REPORT_DRAFT.md,94,0.00753,직접,step11i_summary.csv · cdf_ece,| 다항 로지스틱 | 1.40594 | 0.00753 | 0.69421 |
+REPORT_DRAFT.md,94,0.69421,직접,step11g_xgb_full.csv · auc_late,| 다항 로지스틱 | 1.40594 | 0.00753 | 0.69421 |
+REPORT_DRAFT.md,95,1.40470,직접,step11i_summary.csv · log_loss,| **XGBoost (채택)** | 1.40470 ± 0.00015 | **0.00653 ± 0.00003** | 0.696
+REPORT_DRAFT.md,95,0.00015,직접,step11i_summary.csv · log_loss_sd,| **XGBoost (채택)** | 1.40470 ± 0.00015 | **0.00653 ± 0.00003** | 0.696
+REPORT_DRAFT.md,95,0.00653,직접,step11i_summary.csv · cdf_ece,| **XGBoost (채택)** | 1.40470 ± 0.00015 | **0.00653 ± 0.00003** | 0.696
+REPORT_DRAFT.md,95,0.00003,직접,step11i_summary.csv · cdf_ece_sd,| **XGBoost (채택)** | 1.40470 ± 0.00015 | **0.00653 ± 0.00003** | 0.696
+REPORT_DRAFT.md,95,0.69607,직접,step11c_seed_check.csv · auc_late,| **XGBoost (채택)** | 1.40470 ± 0.00015 | **0.00653 ± 0.00003** | 0.696
+REPORT_DRAFT.md,96,1.39993,직접,step11i_summary.csv · log_loss,| MLP | **1.39993 ± 0.00032** | 0.00868 ± 0.00132 | **0.70028** |
+REPORT_DRAFT.md,96,0.00032,직접,step11i_summary.csv · log_loss_sd,| MLP | **1.39993 ± 0.00032** | 0.00868 ± 0.00132 | **0.70028** |
+REPORT_DRAFT.md,96,0.00868,직접,step11i_summary.csv · cdf_ece,| MLP | **1.39993 ± 0.00032** | 0.00868 ± 0.00132 | **0.70028** |
+REPORT_DRAFT.md,96,0.00132,직접,step11i_summary.csv · cdf_ece_sd,| MLP | **1.39993 ± 0.00032** | 0.00868 ± 0.00132 | **0.70028** |
+REPORT_DRAFT.md,96,0.70028,직접,step11d_mlp_search.csv · auc_late,| MLP | **1.39993 ± 0.00032** | 0.00868 ± 0.00132 | **0.70028** |
+REPORT_DRAFT.md,98,0.00601,직접,step11i_decision.csv · 알고리즘 3종 폭,세 모델의 폭이 **0.00601**뿐이다. 그리고 **두 주 지표가 서로 다른 모델을 가리킨다.**
+REPORT_DRAFT.md,102,0.00215,직접,step11i_verdict.csv · 차이,| CDF 보정오차 — XGBoost vs MLP | 0.00215 | 0.00265 | **구분 불가** |
+REPORT_DRAFT.md,102,0.00265,직접,step11i_verdict.csv · 사전선언 임계값,| CDF 보정오차 — XGBoost vs MLP | 0.00215 | 0.00265 | **구분 불가** |
+REPORT_DRAFT.md,103,0.00477,직접,step11i_decision.csv · 지불한 log loss,| log loss — MLP vs XGBoost | 0.00477 | 0.00065 | 실재 |
+REPORT_DRAFT.md,103,0.00065,직접,step11i_verdict.csv · 사전선언 임계값,| log loss — MLP vs XGBoost | 0.00477 | 0.00065 | 실재 |
+REPORT_DRAFT.md,106,0.000026,직접,step11i_summary.csv · cdf_ece_sd,"① **채택 지표 자체의 재현성** — 시드를 바꾸면 보정오차가 트리는 sd 0.000026, MLP는"
+REPORT_DRAFT.md,107,0.001323,직접,step11i_summary.csv · cdf_ece_sd,0.001323 움직인다. ② **편별 정확한 기여도 분해**(TreeSHAP) — 이쪽은 §4.4에 선언하지
+REPORT_DRAFT.md,108,0.00477,직접,step11i_decision.csv · 지불한 log loss,"않은 근거이고, **선언 밖이라고 적는다.** 대가는 log loss **0.00477**이고, 이 차이는"
+REPORT_DRAFT.md,109,0.9152,직접,step11g_xgb_full.csv · coverage_90,약속 이행률로 번역되지 않는다(0.9152 vs 0.9140).
+REPORT_DRAFT.md,109,0.9140,직접,step11i_summary.csv · coverage_90,약속 이행률로 번역되지 않는다(0.9152 vs 0.9140).
+REPORT_DRAFT.md,117,1.40473,직접,step11_curves_xgb.csv · val_mlogloss,| 예약 시점 12변수만 | 1.40473 | 0.69607 |
+REPORT_DRAFT.md,117,0.69607,직접,step11_models.csv · auc_late,| 예약 시점 12변수만 | 1.40473 | 0.69607 |
+REPORT_DRAFT.md,118,1.34895,직접,step14_models.csv · log_loss,| **+ 그날의 유형(가정)** | **1.34895** | **0.75139** |
+REPORT_DRAFT.md,118,0.75139,직접,step14_models.csv · auc_late,| **+ 그날의 유형(가정)** | **1.34895** | **0.75139** |
+REPORT_DRAFT.md,120,0.05578,직접,step11i_decision.csv · 하루 유형을 묻는 효과,차이가 **0.05578** — 알고리즘을 바꿔 얻은 폭(0.00601)의 **9배**다. 그리고 그 유형은
+REPORT_DRAFT.md,120,0.00601,직접,step11i_decision.csv · 알고리즘 3종 폭,차이가 **0.05578** — 알고리즘을 바꿔 얻은 폭(0.00601)의 **9배**다. 그리고 그 유형은
+REPORT_DRAFT.md,121,0.5622,직접,step14_type_prediction.csv · accuracy,"모델이 대신 맞혀 줄 수 없다: 출발지 유형 정확도 **0.5622** vs 최빈값 **0.5664**(−0.0042),"
+REPORT_DRAFT.md,121,0.5664,직접,step06_scenario_summary.csv · 정상일,"모델이 대신 맞혀 줄 수 없다: 출발지 유형 정확도 **0.5622** vs 최빈값 **0.5664**(−0.0042),"
+REPORT_DRAFT.md,121,0.0042,직접,step12_windows.csv · cdf_ece,"모델이 대신 맞혀 줄 수 없다: 출발지 유형 정확도 **0.5622** vs 최빈값 **0.5664**(−0.0042),"
+REPORT_DRAFT.md,122,0.5541,직접,step14_type_prediction.csv · accuracy,도착지 **0.5541** vs **0.5644**(−0.0102). **맞힐 수 없으니 묻는다.**
+REPORT_DRAFT.md,122,0.5644,직접,step14_type_prediction.csv · majority_baseline,도착지 **0.5541** vs **0.5644**(−0.0102). **맞힐 수 없으니 묻는다.**
+REPORT_DRAFT.md,122,0.0102,직접,step11f_mlp_epochs.csv · cdf_ece,도착지 **0.5541** vs **0.5644**(−0.0102). **맞힐 수 없으니 묻는다.**
+REPORT_DRAFT.md,131,0.00900,직접,step12_windows.csv · cdf_ece,| 보정 없음 | 0.00900 |
+REPORT_DRAFT.md,132,0.00193,직접,step12_windows.csv · cdf_ece,| **작년 같은 세 달** | **0.00193** |
+REPORT_DRAFT.md,133,0.00266,직접,step12_windows.csv · cdf_ece,| 직전 달 | 0.00266 |
+REPORT_DRAFT.md,134,0.00545,직접,step12_windows.csv · cdf_ece,| 최근 14일 롤링 | 0.00545 |
+REPORT_DRAFT.md,136,0.01052,직접,step15_metrics.csv · cdf_ece,"test 2026에서 보정오차는 **0.01052 → 0.00574**(1.8배 개선), log loss는 **1.35524 "
+REPORT_DRAFT.md,136,0.00574,직접,step15_metrics.csv · cdf_ece,"test 2026에서 보정오차는 **0.01052 → 0.00574**(1.8배 개선), log loss는 **1.35524 "
+REPORT_DRAFT.md,136,1.35524,직접,step15_metrics.csv · log_loss,"test 2026에서 보정오차는 **0.01052 → 0.00574**(1.8배 개선), log loss는 **1.35524 "
+REPORT_DRAFT.md,137,1.35803,직접,step15_metrics.csv · log_loss,"1.35803**으로 오히려 나빠진다. 두 목표가 다르다는 증거이고, 우리는 후자를 택했다."
+REPORT_DRAFT.md,165,0.2142,직접,step13_shap.csv · mean_abs_shap,| 출발지 유형(가정) | 0.2142 | — (가정) |
+REPORT_DRAFT.md,166,0.2096,직접,step13_shap.csv · mean_abs_shap,| 항공사 | 0.2096 | **예** |
+REPORT_DRAFT.md,167,0.1906,직접,step13_shap.csv · mean_abs_shap,| 도착지 유형(가정) | 0.1906 | — (가정) |
+REPORT_DRAFT.md,168,0.1903,직접,step13_shap.csv · mean_abs_shap,| 출발 시각 | 0.1903 | **예** |
+REPORT_DRAFT.md,180,0.00215,직접,step11i_verdict.csv · 차이,| **채택이 동점에서 갈렸다** | 0.00215 ≤ 0.00265 (§5.1) |
+REPORT_DRAFT.md,180,0.00265,직접,step11i_verdict.csv · 사전선언 임계값,| **채택이 동점에서 갈렸다** | 0.00215 ≤ 0.00265 (§5.1) |
+REPORT_DRAFT.md,200,0.0060,직접,step11i_decision.csv · 알고리즘 3종 폭,"3. 모델을 더 만져서 얻은 것은 **0.0060**이었지만, **손님에게 그날을 한 번 물은 것이"
+REPORT_DRAFT.md,201,0.0558,직접,step11i_decision.csv · 하루 유형을 묻는 효과,0.0558**을 가져왔다. 맞힐 수 없는 것은 맞히려 하지 말고 **물어보는 것**이 이 문제의
 REPORT_OUTLINE.md,33,0.00601,직접,step11i_decision.csv · 알고리즘 3종 폭,"| 5.1.1 | 알고리즘 3종 | 세 모델의 폭이 0.00601뿐이고, **채택은 동점에서 갈렸다** | 9·10·11 |"
 REPORT_OUTLINE.md,36,0.0060,직접,step11i_decision.csv · 알고리즘 3종 폭,| 5.1.4 | **가정 입력이 값을 하는가** | 모델을 만져 얻은 0.0060 vs 손님에게 물어 얻은 0.0558 | 
 REPORT_OUTLINE.md,36,0.0558,직접,step11i_decision.csv · 하루 유형을 묻는 효과,| 5.1.4 | **가정 입력이 값을 하는가** | 모델을 만져 얻은 0.0060 vs 손님에게 물어 얻은 0.0558 | 

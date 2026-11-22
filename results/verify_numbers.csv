@@ -1,0 +1,143 @@
+﻿문서,줄,숫자,판정,출처,문맥
+REPORT.md,348,0.000152,직접,step11i_summary.csv · log_loss_sd,sd **0.000152** → 임계값 **0.000304** (`step11c_seed_check.csv` 의 base 팔 
+REPORT.md,348,0.000304,배수,step11i_summary.csv · log_loss_sd (0.000152 × 2),sd **0.000152** → 임계값 **0.000304** (`step11c_seed_check.csv` 의 base 팔 
+REPORT.md,349,1.40473,직접,step11c_seed_check.csv · log_loss,1.40473 · 1.40484 · 1.40454 에서; 모델별 산포는 `step11i_summary.csv` 에 모았다).
+REPORT.md,349,1.40484,직접,step11c_seed_check.csv · log_loss,1.40473 · 1.40484 · 1.40454 에서; 모델별 산포는 `step11i_summary.csv` 에 모았다).
+REPORT.md,349,1.40454,직접,step11c_seed_check.csv · log_loss,1.40473 · 1.40484 · 1.40454 에서; 모델별 산포는 `step11i_summary.csv` 에 모았다).
+REPORT.md,356,0.000152,직접,step11i_summary.csv · log_loss_sd,| XGBoost | 0.000152 | **0.000026** | `step11j_eta_seeds.csv` |
+REPORT.md,356,0.000026,직접,step11i_summary.csv · cdf_ece_sd,| XGBoost | 0.000152 | **0.000026** | `step11j_eta_seeds.csv` |
+REPORT.md,357,0.000323,직접,step11i_summary.csv · log_loss_sd,| MLP | 0.000323 | **0.001323** | `step11f_mlp_seeds.csv` |
+REPORT.md,357,0.001323,직접,step11i_summary.csv · cdf_ece_sd,| MLP | 0.000323 | **0.001323** | `step11f_mlp_seeds.csv` |
+REPORT.md,386,1.40594,직접,step11c_polynomial.csv · log_loss,| 다항 로지스틱 (차수 1 · C 1) | 1.40594 | 0.00753 | 0.69421 |
+REPORT.md,386,0.00753,직접,step11h_logistic_degrees.csv · cdf_ece,| 다항 로지스틱 (차수 1 · C 1) | 1.40594 | 0.00753 | 0.69421 |
+REPORT.md,386,0.69421,직접,step11g_xgb_full.csv · auc_late,| 다항 로지스틱 (차수 1 · C 1) | 1.40594 | 0.00753 | 0.69421 |
+REPORT.md,387,1.40470,직접,step11i_summary.csv · log_loss,"| **XGBoost (채택, eta 0.08)** | 1.40470 ± 0.00015 | **0.00653 ± 0.00003"
+REPORT.md,387,0.00015,직접,step11i_summary.csv · log_loss_sd,"| **XGBoost (채택, eta 0.08)** | 1.40470 ± 0.00015 | **0.00653 ± 0.00003"
+REPORT.md,387,0.00653,직접,step11i_summary.csv · cdf_ece,"| **XGBoost (채택, eta 0.08)** | 1.40470 ± 0.00015 | **0.00653 ± 0.00003"
+REPORT.md,387,0.00003,직접,step11i_summary.csv · cdf_ece_sd,"| **XGBoost (채택, eta 0.08)** | 1.40470 ± 0.00015 | **0.00653 ± 0.00003"
+REPORT.md,387,0.69607,직접,step11_models.csv · auc_late,"| **XGBoost (채택, eta 0.08)** | 1.40470 ± 0.00015 | **0.00653 ± 0.00003"
+REPORT.md,388,1.39993,직접,step11i_summary.csv · log_loss,| MLP (256-64 · lr 3e-4) | **1.39993 ± 0.00032** | 0.00868 ± 0.00132 |
+REPORT.md,388,0.00032,직접,step11i_summary.csv · log_loss_sd,| MLP (256-64 · lr 3e-4) | **1.39993 ± 0.00032** | 0.00868 ± 0.00132 |
+REPORT.md,388,0.00868,직접,step11i_summary.csv · cdf_ece,| MLP (256-64 · lr 3e-4) | **1.39993 ± 0.00032** | 0.00868 ± 0.00132 |
+REPORT.md,388,0.00132,직접,step11i_summary.csv · cdf_ece_sd,| MLP (256-64 · lr 3e-4) | **1.39993 ± 0.00032** | 0.00868 ± 0.00132 |
+REPORT.md,388,0.70028,직접,step11d_mlp_search.csv · auc_late,| MLP (256-64 · lr 3e-4) | **1.39993 ± 0.00032** | 0.00868 ± 0.00132 |
+REPORT.md,394,0.7383,직접,step11_reliability.csv · predicted,> 모델이 평균 0.7383을 말했는데 실제가 0.7255였다면 그 경계의 오차는 0.0128이다.
+REPORT.md,394,0.7255,직접,step11_reliability.csv · actual,> 모델이 평균 0.7383을 말했는데 실제가 0.7255였다면 그 경계의 오차는 0.0128이다.
+REPORT.md,394,0.0128,직접,step08_class_distribution.csv · share,> 모델이 평균 0.7383을 말했는데 실제가 0.7255였다면 그 경계의 오차는 0.0128이다.
+REPORT.md,398,0.00601,직접,step11i_decision.csv · 알고리즘 3종 폭,**할 말** — 세 모델의 폭이 **0.00601** 뿐이다. 알고리즘을 바꿔서 얻는 것은 여기까지다.
+REPORT.md,405,0.00100,직접,step11_reliability.csv · gap,| **CDF 보정오차** — XGBoost vs 로지스틱 | 0.00100 | 0.00005 | 실재 |
+REPORT.md,405,0.00005,직접,step11i_verdict.csv · 사전선언 임계값,| **CDF 보정오차** — XGBoost vs 로지스틱 | 0.00100 | 0.00005 | 실재 |
+REPORT.md,406,0.00215,직접,step11i_verdict.csv · 차이,| **CDF 보정오차** — XGBoost vs MLP | 0.00215 | **0.00265** | **구분 불가** |
+REPORT.md,406,0.00265,직접,step11i_verdict.csv · 사전선언 임계값,| **CDF 보정오차** — XGBoost vs MLP | 0.00215 | **0.00265** | **구분 불가** |
+REPORT.md,407,0.00477,직접,step11i_decision.csv · 지불한 log loss,| **log loss** — MLP vs XGBoost | 0.00477 | 0.00065 | 실재 |
+REPORT.md,407,0.00065,직접,step11i_verdict.csv · 사전선언 임계값,| **log loss** — MLP vs XGBoost | 0.00477 | 0.00065 | 실재 |
+REPORT.md,414,0.000026,직접,step11i_summary.csv · cdf_ece_sd,"> **0.000026**, MLP는 **0.001323** 움직인다(**51배**). 설정끼리의 폭도 트리 13종이"
+REPORT.md,414,0.001323,직접,step11i_summary.csv · cdf_ece_sd,"> **0.000026**, MLP는 **0.001323** 움직인다(**51배**). 설정끼리의 폭도 트리 13종이"
+REPORT.md,415,0.00050,직접,step11i_summary.csv · cdf_ece 설정간 폭,"> **0.00050**인데 MLP 5종이 **0.00390**이다. *""MLP의 0.00868은 돌릴 때마다 다른 값이고,"
+REPORT.md,415,0.00390,직접,step11i_summary.csv · cdf_ece 설정간 폭,"> **0.00050**인데 MLP 5종이 **0.00390**이다. *""MLP의 0.00868은 돌릴 때마다 다른 값이고,"
+REPORT.md,415,0.00868,직접,step11i_summary.csv · cdf_ece,"> **0.00050**인데 MLP 5종이 **0.00390**이다. *""MLP의 0.00868은 돌릴 때마다 다른 값이고,"
+REPORT.md,420,0.00477,직접,step11i_decision.csv · 지불한 log loss,> **대가**: log loss **0.00477**을 지불했다. 그 크기는 ⓐ 알고리즘 3종이 만드는 폭
+REPORT.md,421,0.00601,직접,step11i_decision.csv · 알고리즘 3종 폭,"> **0.00601** 안이고, ⓑ 손님에게 하루 유형을 한 번 묻는 효과 **0.05578**"
+REPORT.md,421,0.05578,직접,step11i_decision.csv · 하루 유형을 묻는 효과,"> **0.00601** 안이고, ⓑ 손님에게 하루 유형을 한 번 묻는 효과 **0.05578**"
+REPORT.md,423,0.9152,직접,step11g_xgb_full.csv · coverage_90,"> ⓒ **약속 이행률로 번역되지 않는다** — val 2025에서 XGBoost 0.9152, MLP 0.9140이다."
+REPORT.md,423,0.9140,직접,step11i_summary.csv · coverage_90,"> ⓒ **약속 이행률로 번역되지 않는다** — val 2025에서 XGBoost 0.9152, MLP 0.9140이다."
+REPORT.md,439,0.00318,차이,step11g_xgb_full.csv · log_loss (1.40753 − 1.40435),| XGBoost | 13종 | 0.00318 | **0.00050** | `step11g_xgb_full.csv` |
+REPORT.md,439,0.00050,직접,step11i_summary.csv · cdf_ece 설정간 폭,| XGBoost | 13종 | 0.00318 | **0.00050** | `step11g_xgb_full.csv` |
+REPORT.md,440,0.00208,차이,step11g_xgb_full.csv · log_loss (1.40653 − 1.40445),| 로지스틱 | 5종 | 0.00208 | 0.00069 | `step11h_logistic_degrees.csv` |
+REPORT.md,440,0.00069,직접,step11i_summary.csv · cdf_ece 설정간 폭,| 로지스틱 | 5종 | 0.00208 | 0.00069 | `step11h_logistic_degrees.csv` |
+REPORT.md,441,0.00062,차이,step11d_mlp_search.csv · log_loss (1.40067 − 1.40005),| MLP | 5종 | 0.00062 | **0.00390** | `step11d_mlp_search.csv` |
+REPORT.md,441,0.00390,직접,step11i_summary.csv · cdf_ece 설정간 폭,| MLP | 5종 | 0.00062 | **0.00390** | `step11d_mlp_search.csv` |
+REPORT.md,444,0.00062,차이,step11d_mlp_search.csv · log_loss (1.40067 − 1.40005),"(0.00062), 보정오차에서는 가장 많이 흔들린다(0.00390 — 트리의 **8배**). 설정을"
+REPORT.md,444,0.00390,직접,step11i_summary.csv · cdf_ece 설정간 폭,"(0.00062), 보정오차에서는 가장 많이 흔들린다(0.00390 — 트리의 **8배**). 설정을"
+REPORT.md,452,1.35196,직접,step11g_xgb_full.csv · train_mlogloss,| 3 | 1.35196 | 1.40541 | 0.053 |
+REPORT.md,452,1.40541,직접,step11g_xgb_full.csv · log_loss,| 3 | 1.35196 | 1.40541 | 0.053 |
+REPORT.md,453,1.33785,직접,step11g_xgb_full.csv · train_mlogloss,| 6 | 1.33785 | 1.40445 | 0.067 |
+REPORT.md,453,1.40445,직접,step11g_xgb_full.csv · log_loss,| 6 | 1.33785 | 1.40445 | 0.067 |
+REPORT.md,454,1.32969,직접,step11g_xgb_full.csv · train_mlogloss,| 8 | 1.32969 | 1.40525 | 0.076 |
+REPORT.md,454,1.40525,직접,step11g_xgb_full.csv · log_loss,| 8 | 1.32969 | 1.40525 | 0.076 |
+REPORT.md,455,1.32483,직접,step11g_xgb_full.csv · train_mlogloss,| 10 | 1.32483 | 1.40653 | 0.082 |
+REPORT.md,455,1.40653,직접,step11g_xgb_full.csv · log_loss,| 10 | 1.32483 | 1.40653 | 0.082 |
+REPORT.md,456,1.30462,직접,step11g_xgb_full.csv · train_mlogloss,| 12 | 1.30462 | 1.40753 | **0.103** |
+REPORT.md,456,1.40753,직접,step11g_xgb_full.csv · log_loss,| 12 | 1.30462 | 1.40753 | **0.103** |
+REPORT.md,458,0.0473,차이,step11g_xgb_full.csv · train_mlogloss (1.35196 − 1.30462),깊이 3→12에서 **train은 0.0473 좋아지고 val은 0.0021 나빠진다.** 늘어난 것은 전부
+REPORT.md,458,0.0021,직접,step08_cause_by_hour.csv · SecurityDelay,깊이 3→12에서 **train은 0.0473 좋아지고 val은 0.0021 나빠진다.** 늘어난 것은 전부
+REPORT.md,463,1.40435,직접,step11g_xgb_full.csv · log_loss,"`eta=0.05`(1.40435), 운영 설정 `eta=0.08`은 1.40473으로 **0.00038** 뒤다. 상위 6종"
+REPORT.md,463,1.40473,직접,step11g_xgb_full.csv · log_loss,"`eta=0.05`(1.40435), 운영 설정 `eta=0.08`은 1.40473으로 **0.00038** 뒤다. 상위 6종"
+REPORT.md,463,0.00038,차이,step11g_xgb_full.csv · log_loss (1.40473 − 1.40435),"`eta=0.05`(1.40435), 운영 설정 `eta=0.08`은 1.40473으로 **0.00038** 뒤다. 상위 6종"
+REPORT.md,464,0.00004,차이,step11g_xgb_full.csv · log_loss (1.40439 − 1.40435),연속 간격은 0.00004~0.00014로 전부 임계값 아래다. 같은 시드 3개로 **짝지어** 다시 재
+REPORT.md,464,0.00014,차이,step11g_xgb_full.csv · log_loss (1.40459 − 1.40445),연속 간격은 0.00004~0.00014로 전부 임계값 아래다. 같은 시드 3개로 **짝지어** 다시 재
+REPORT.md,465,0.00018,직접,step11j_verdict.csv · 짝지은 차이 평균,"봤더니 — 세 시드 중 두 번만 `eta=0.05`가 이기고, 평균 차이 **−0.00018**은 임계값"
+REPORT.md,466,0.00030,직접,step11d_mlp_search.csv · lr,**0.00030** 안이다. 채택 지표에서는 두 설정이 아예 같다(0.00654 vs 0.00653).
+REPORT.md,466,0.00654,직접,step11g_xgb_full.csv · cdf_ece,**0.00030** 안이다. 채택 지표에서는 두 설정이 아예 같다(0.00654 vs 0.00653).
+REPORT.md,466,0.00653,직접,step11i_summary.csv · cdf_ece,**0.00030** 안이다. 채택 지표에서는 두 설정이 아예 같다(0.00654 vs 0.00653).
+REPORT.md,477,1.40594,직접,step11c_polynomial.csv · log_loss,| **1 (확장 없음)** | 355 | 147 | **1.40594** | **0.00753** | **0.69421** 
+REPORT.md,477,0.00753,직접,step11h_logistic_degrees.csv · cdf_ece,| **1 (확장 없음)** | 355 | 147 | **1.40594** | **0.00753** | **0.69421** 
+REPORT.md,477,0.69421,직접,step11g_xgb_full.csv · auc_late,| **1 (확장 없음)** | 355 | 147 | **1.40594** | **0.00753** | **0.69421** 
+REPORT.md,478,1.40594,직접,step11c_polynomial.csv · log_loss,| 2 | 370 | 210 | 1.40594 | 0.00819 | 0.69389 |
+REPORT.md,478,0.00819,직접,step11h_logistic_degrees.csv · cdf_ece,| 2 | 370 | 210 | 1.40594 | 0.00819 | 0.69389 |
+REPORT.md,478,0.69389,직접,step11h_logistic_degrees.csv · auc_late,| 2 | 370 | 210 | 1.40594 | 0.00819 | 0.69389 |
+REPORT.md,479,1.40802,직접,step11h_logistic_degrees.csv · log_loss,| 3 | 405 | 315 | 1.40802 | 0.00813 | 0.69067 |
+REPORT.md,479,0.00813,직접,step11c_polynomial.csv · cdf_ece,| 3 | 405 | 315 | 1.40802 | 0.00813 | 0.69067 |
+REPORT.md,479,0.69067,직접,step11h_logistic_degrees.csv · auc_late,| 3 | 405 | 315 | 1.40802 | 0.00813 | 0.69067 |
+REPORT.md,481,1.40594,직접,step11c_polynomial.csv · log_loss,"규제 강도도 움직이지 않는다: C=0.1 → 1.40594, C=1 → 1.40594, C=10 → 1.40597."
+REPORT.md,481,1.40597,직접,step11h_logistic_degrees.csv · log_loss,"규제 강도도 움직이지 않는다: C=0.1 → 1.40594, C=1 → 1.40594, C=10 → 1.40597."
+REPORT.md,482,0.00003,직접,step11i_summary.csv · cdf_ece_sd,"**폭 0.00003**, 임계값의 1/10. 이유는 표본 크기다 — 5,408,935행 ÷ 355열 ≈ **열 하나당"
+REPORT.md,494,0.00046,차이,step11c_seed_check.csv · log_loss (1.40473 − 1.40427),> 세 번 모두 같은 방향이었지만(−0.00046 · −0.00034 · −0.00006) log loss 평균
+REPORT.md,494,0.00034,차이,step11c_seed_check.csv · log_loss (1.40484 − 1.40450),> 세 번 모두 같은 방향이었지만(−0.00046 · −0.00034 · −0.00006) log loss 평균
+REPORT.md,494,0.00006,차이,step11c_seed_check.csv · log_loss (1.40454 − 1.40448),> 세 번 모두 같은 방향이었지만(−0.00046 · −0.00034 · −0.00006) log loss 평균
+REPORT.md,495,0.00029,차이,step11c_seed_check.csv · auc_late (0.69641 − 0.69612),> **−0.00029**가
+REPORT.md,496,0.000304,배수,step11i_summary.csv · log_loss_sd (0.000152 × 2),"> 임계값 **0.000304**(§4.4, `step11i_summary.csv`) 안이다. **구분 불가** — 트리는"
+REPORT.md,501,0.00044,직접,step11i_summary.csv · coverage_90_sd,"> (+0.00044, 임계값의 1.4배)은 **더 나빠지는 쪽**으로 움직여 결론을 강화한다."
+REPORT.md,508,0.00601,직접,step11i_decision.csv · 알고리즘 3종 폭,"> 재적합 12회), 전부 합쳐도 폭이 **0.00601**이다. **예약 시점 12변수만으로는 여기가"
+REPORT.md,518,1.40473,직접,step11_curves_xgb.csv · val_mlogloss,| 예약 시점 12변수만 | 1.40473 | 0.69607 |
+REPORT.md,518,0.69607,직접,step11_models.csv · auc_late,| 예약 시점 12변수만 | 1.40473 | 0.69607 |
+REPORT.md,519,1.34895,직접,step14_models.csv · log_loss,| **+ 그날의 유형 (가정)** | **1.34895** | **0.75139** |
+REPORT.md,519,0.75139,직접,step14_models.csv · auc_late,| **+ 그날의 유형 (가정)** | **1.34895** | **0.75139** |
+REPORT.md,521,0.0558,직접,step11i_decision.csv · 하루 유형을 묻는 효과,"차이가 log loss **0.0558**, AUC **+0.0553** — 알고리즘을 바꿔서 얻은 폭(0.00601)의"
+REPORT.md,521,0.0553,차이,step14_models.csv · log_loss (1.40428 − 1.34895),"차이가 log loss **0.0558**, AUC **+0.0553** — 알고리즘을 바꿔서 얻은 폭(0.00601)의"
+REPORT.md,521,0.00601,직접,step11i_decision.csv · 알고리즘 3종 폭,"차이가 log loss **0.0558**, AUC **+0.0553** — 알고리즘을 바꿔서 얻은 폭(0.00601)의"
+REPORT.md,529,0.5622,직접,step14_type_prediction.csv · accuracy,| 출발지 유형 | 0.5622 | 0.5664 | **−0.0042** |
+REPORT.md,529,0.5664,직접,step14_type_prediction.csv · majority_baseline,| 출발지 유형 | 0.5622 | 0.5664 | **−0.0042** |
+REPORT.md,529,0.0042,직접,step14_type_prediction.csv · margin,| 출발지 유형 | 0.5622 | 0.5664 | **−0.0042** |
+REPORT.md,530,0.5541,직접,step14_type_prediction.csv · accuracy,| 도착지 유형 | 0.5541 | 0.5644 | **−0.0102** |
+REPORT.md,530,0.5644,직접,step14_type_prediction.csv · majority_baseline,| 도착지 유형 | 0.5541 | 0.5644 | **−0.0102** |
+REPORT.md,530,0.0102,직접,step14_type_prediction.csv · margin,| 도착지 유형 | 0.5541 | 0.5644 | **−0.0102** |
+REPORT.md,561,0.00900,직접,step12_windows.csv · cdf_ece,| 보정 없음 | 0.00900 |
+REPORT.md,562,0.00193,직접,step12_windows.csv · cdf_ece,| **작년 같은 세 달** | **0.00193** |
+REPORT.md,563,0.00266,직접,step12_windows.csv · cdf_ece,| 직전 달 | 0.00266 |
+REPORT.md,564,0.00545,직접,step12_windows.csv · cdf_ece,| 최근 14일 롤링 | 0.00545 |
+REPORT.md,578,1.35524,직접,step15_metrics.csv · log_loss,| 보정 전 | 1.35524 | 0.01052 | 0.75145 |
+REPORT.md,578,0.01052,직접,step15_metrics.csv · cdf_ece,| 보정 전 | 1.35524 | 0.01052 | 0.75145 |
+REPORT.md,578,0.75145,직접,step15_metrics.csv · auc_late,| 보정 전 | 1.35524 | 0.01052 | 0.75145 |
+REPORT.md,579,1.35803,직접,step15_metrics.csv · log_loss,| **보정 후** | 1.35803 | **0.00574** | 0.75143 |
+REPORT.md,579,0.00574,직접,step15_metrics.csv · cdf_ece,| **보정 후** | 1.35803 | **0.00574** | 0.75143 |
+REPORT.md,579,0.75143,직접,step15_metrics.csv · auc_late,| **보정 후** | 1.35803 | **0.00574** | 0.75143 |
+REPORT.md,581,0.0028,차이,step15_metrics.csv · log_loss (1.35803 − 1.35524),**할 말** — CDF 보정오차는 **1.8배 개선**되고 log loss는 **오히려 0.0028 나빠진다.**
+REPORT.md,647,0.2142,직접,step13_shap.csv · mean_abs_shap,| 1 | **출발지의 그날 유형** | 0.2142 | ✅ 가정으로 입력 |
+REPORT.md,648,0.2096,직접,step13_shap.csv · mean_abs_shap,| 2 | **항공사** | 0.2096 | ✅ 고를 수 있음 |
+REPORT.md,649,0.1906,직접,step13_shap.csv · mean_abs_shap,| 3 | **도착지의 그날 유형** | 0.1906 | ✅ 가정으로 입력 |
+REPORT.md,650,0.1903,직접,step13_shap.csv · mean_abs_shap,| 4 | **출발 시각** | 0.1903 | ✅ 고를 수 있음 |
+REPORT.md,651,0.1571,직접,step13_shap.csv · mean_abs_shap,| 5 | 출발 공항 | 0.1571 | ❌ |
+REPORT.md,652,0.1256,직접,step13_shap.csv · mean_abs_shap,| 6 | 도착 공항 | 0.1256 | ❌ |
+REPORT.md,653,0.0895,직접,step13_shap.csv · mean_abs_shap,| 7 | 도착 시각 | 0.0895 | ❌ |
+REPORT.md,654,0.0383,직접,step13_shap.csv · mean_abs_shap,| 8 | 공휴일까지의 거리 | 0.0383 | ❌ |
+REPORT.md,696,0.0028,차이,step15_metrics.csv · log_loss (1.35803 − 1.35524),아니다. 우리는 후자를 선택했고 그 대가가 log loss 0.0028이다 (`step15_metrics.csv`).
+REPORT.md,707,0.00215,직접,step11i_verdict.csv · 차이,| **채택이 동점에서 갈렸다** | 채택 지표 차이 **0.00215** ≤ 임계값 **0.00265** | §4.4의 지표
+REPORT.md,707,0.00265,직접,step11i_verdict.csv · 사전선언 임계값,| **채택이 동점에서 갈렸다** | 채택 지표 차이 **0.00215** ≤ 임계값 **0.00265** | §4.4의 지표
+REPORT.md,708,0.00132,직접,step11i_summary.csv · cdf_ece_sd,| **MLP의 보정오차는 재현되지 않는다** | 시드 sd **0.00132** (트리의 **51배**) | 채택하지 않은 
+REPORT.md,713,0.00002,직접,step11h_logistic_degrees.csv · gained_by_converging,"> 수렴까지(124~315회) 돌렸고, 그렇게 얻은 것은 차수 1에서 **−0.00002**, 가장 많이"
+REPORT.md,714,0.00044,직접,step11h_logistic_degrees.csv · gained_by_converging,> 움직인 차수 3에서 **+0.00044**(더 나빠지는 쪽)였다. 차수 순위는 그대로다.
+REPORT.md,743,0.0060,직접,step11i_decision.csv · 알고리즘 3종 폭,"3. 모델을 더 만져서 얻은 것은 0.0060이었지만, **손님에게 그날을 한 번 물은 것이 0.0558**"
+REPORT.md,743,0.0558,직접,step11i_decision.csv · 하루 유형을 묻는 효과,"3. 모델을 더 만져서 얻은 것은 0.0060이었지만, **손님에게 그날을 한 번 물은 것이 0.0558**"
+REPORT_OUTLINE.md,33,0.00601,직접,step11i_decision.csv · 알고리즘 3종 폭,"| 5.1.1 | 알고리즘 3종 | 세 모델의 폭이 0.00601뿐이고, **채택은 동점에서 갈렸다** | 9·10·11 |"
+REPORT_OUTLINE.md,36,0.0060,직접,step11i_decision.csv · 알고리즘 3종 폭,| 5.1.4 | **가정 입력이 값을 하는가** | 모델을 만져 얻은 0.0060 vs 손님에게 물어 얻은 0.0558 | 
+REPORT_OUTLINE.md,36,0.0558,직접,step11i_decision.csv · 하루 유형을 묻는 효과,| 5.1.4 | **가정 입력이 값을 하는가** | 모델을 만져 얻은 0.0060 vs 손님에게 물어 얻은 0.0558 | 
+REPORT_OUTLINE.md,64,0.00477,직접,step11i_decision.csv · 지불한 log loss,정하지 못했다는 사실 · 동점을 깬 근거 ①②(②는 선언 밖) · 지불한 0.00477**까지 함께
+README.md,73,1.40473,직접,step11_curves_xgb.csv · val_mlogloss,| 예약 시점 12변수만 | 1.40473 | 0.69607 |
+README.md,73,0.69607,직접,step11_models.csv · auc_late,| 예약 시점 12변수만 | 1.40473 | 0.69607 |
+README.md,74,1.34895,직접,step14_models.csv · log_loss,| **+ 그날의 유형 (손님의 가정)** | **1.34895** | **0.75139** |
+README.md,74,0.75139,직접,step14_models.csv · auc_late,| **+ 그날의 유형 (손님의 가정)** | **1.34895** | **0.75139** |
+README.md,76,0.00601,직접,step11i_decision.csv · 알고리즘 3종 폭,"알고리즘 세 개를 설정 23종까지 비교해서 얻은 폭이 **0.00601**인데, 손님에게 한 번"
+README.md,77,0.0558,직접,step11i_decision.csv · 하루 유형을 묻는 효과,물어서 얻은 것이 **0.0558** — **9배**입니다. 그리고 그날의 유형은 예약 시점 정보로
+README.md,181,0.000152,직접,step11i_summary.csv · log_loss_sd,같은 설정을 시드만 바꿔 세 번 적합해 잡음을 먼저 재고(sd 0.000152) 그 **2배**
+README.md,182,0.000304,배수,step11i_summary.csv · log_loss_sd (0.000152 × 2),(0.000304)를 임계값으로 씁니다. 사후에 기준을 정하면 아무 숫자나 근거가 됩니다.

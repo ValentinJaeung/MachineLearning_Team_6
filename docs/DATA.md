@@ -67,7 +67,7 @@ test    2026                   직전 해는 2025
 | 시각 변환 | 4 | `crs_dep_min` `crs_arr_min` `crs_dep_hour` `crs_arr_hour` |
 | 이름표(키) | 3 | `flight_key` `route_key` `group_key` |
 | **시간표 파생** | **3** | **`sched_pad` `dest_arr_load` `days_to_nearest_holiday`** ← 모델 입력 |
-| 그날의 유형 | 2 | `scen_origin` `scen_dest` (5유형, 14단계 모델 B 전용) |
+| 그날의 유형 | 2 | `scen_origin` `scen_dest` (5유형, 보고서 본문에서는 사용하지 않음) |
 | 정답 | 1 | `y_class` (10구간) |
 
 **모델 입력은 12개**입니다 — A-1 에서 바로 오는 9개와, 공개 시간표·작년 공개 기록에서

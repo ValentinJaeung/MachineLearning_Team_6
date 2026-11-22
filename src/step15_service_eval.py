@@ -91,10 +91,16 @@ def by_group(probs, cls, delay, group: pd.Series, level: float,
 
     frame = pd.DataFrame({"group": group.to_numpy(), "has": has,
                           "kept": kept, "promised": promised})
+    # how many flights could be given the promise at all - a group where the
+    # service often answers "보장 불가" is weak in a different way than one
+    # where it answers and then misses
+    reachable = (frame.groupby("group", observed=True)["has"]
+                 .agg(약속가능비율="mean", 전체편수="size").reset_index())
     out = (frame[frame["has"]].groupby("group", observed=True)
            .agg(n=("kept", "size"), 이행률=("kept", "mean"),
                 평균보장지연=("promised", "mean")).reset_index())
-    out = out[out["n"] >= min_rows]
+    out = out.merge(reachable, on="group", how="left")
+    out = out[out["전체편수"] >= min_rows]
     out["오차(%p)"] = ((out["이행률"] - level) * 100).round(2)
     return out.sort_values("이행률")
 

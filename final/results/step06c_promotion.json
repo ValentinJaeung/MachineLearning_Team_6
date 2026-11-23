@@ -1,0 +1,11 @@
+{
+  "rule": "검증 구간 multiclass log loss 가 가장 낮은 계열",
+  "mlp_val_log_loss": 1.351091,
+  "xgboost_long_val_log_loss": 1.351507,
+  "xgboost_long_setting": "기준 depth6 eta0.05",
+  "xgboost_long_best_round": 580,
+  "xgboost_stopped_itself": true,
+  "note": "평가 구간은 이 스텝에서 열지 않았다. 판단은 검증 구간으로만 했다.",
+  "promoted": false,
+  "conclusion": "순위가 그대로다. MLP 가 여전히 0.000416 낮다. 채택을 바꾸지 않았고 보정·평가도 다시 돌리지 않는다."
+}

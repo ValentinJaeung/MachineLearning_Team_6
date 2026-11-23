@@ -1,0 +1,4 @@
+﻿family,설정,C,train_log_loss,val_log_loss,iterations,converged,fit_seconds,max_depth,eta,best_iteration,hidden,lr,params,best_epoch
+로지스틱,C=0.1,0.1,1.353972,1.373743,145.0,True,215.5,,,,,,,
+xgboost,기준 depth6 eta0.05,,1.300321,1.351794,,,1329.4,6.0,0.05,400.0,,,,
+MLP,"넓게 (512, 128, 32)",,1.321718,1.351091,,,720.2,,,,"(512, 128, 32)",0.0003,249322.0,7.0

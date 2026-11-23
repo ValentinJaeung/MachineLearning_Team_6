@@ -1,0 +1,10 @@
+# 중간 산출물과 모델 — 코드로 다시 만들 수 있으므로 넣지 않는다 (650MB)
+data/
+logs/
+
+# 결과 csv 와 그림은 보고서에 쓰므로 넣는다
+!results/
+!figures/
+
+__pycache__/
+*.pyc

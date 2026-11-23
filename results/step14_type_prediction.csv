@@ -1,3 +1,0 @@
-﻿side,accuracy,majority_baseline,majority_class,margin,beats_majority,log_loss
-scen_origin,0.5622,0.5664,정상일,-0.0042,False,1.24605
-scen_dest,0.5541,0.5644,정상일,-0.0102,False,1.23114

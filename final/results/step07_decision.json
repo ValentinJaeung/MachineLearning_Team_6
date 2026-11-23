@@ -1,0 +1,10 @@
+{
+  "rule": "검증 구간 multiclass log loss 가 가장 낮은 계열",
+  "chosen_family": "mlp",
+  "chosen_label": "MLP",
+  "chosen_setting": "넓게 (512, 128, 32)",
+  "val_log_loss": 1.351091,
+  "runner_up": "XGBoost",
+  "gap_to_runner_up": 0.000703,
+  "note": "CDF 보정오차는 참고용이며 선택에 쓰지 않았다."
+}

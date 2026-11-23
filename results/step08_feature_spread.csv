@@ -1,7 +1,0 @@
-﻿feature,ontime_spread_over_deciles
-crs_dep_hour,0.31478663609859053
-sched_pad,0.08445617368397207
-days_to_nearest_holiday,0.07621007871541885
-Distance,0.0750646386778393
-CRSElapsedTime,0.05130566541333126
-dest_arr_load,0.04613058900223632

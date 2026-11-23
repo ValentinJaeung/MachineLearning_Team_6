@@ -1,4 +1,0 @@
-﻿family,설정 수,고른 설정,cdf_ece 설정간 폭,출처,cdf_ece,cdf_ece_sd,cdf_ece_n,log_loss,log_loss_sd,log_loss_n,coverage_90,coverage_90_sd,coverage_90_n,시드 출처
-XGBoost,13,eta=0.08,0.0005,step11g_xgb_full.csv,0.00653,2.6e-05,3,1.4047,0.000152,3,0.9152,0.000436,3,step11j_eta_seeds.csv
-로지스틱,5,차수 1 · C 1,0.00069,step11h_logistic_degrees.csv,0.00753,0.0,1,1.40594,0.0,1,0.9147,0.0,1,"결정적 (재적합해도 같은 해, sd=0)"
-MLP,5,작게 256-64,0.0039,step11d_mlp_search.csv,0.00868,0.001323,3,1.39993,0.000323,3,0.91403,0.000907,3,step11f_mlp_seeds.csv

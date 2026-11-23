@@ -1,0 +1,59 @@
+{
+  "viewing_range": {
+    "settings_from": [
+      2022,
+      2023,
+      2024
+    ],
+    "structure_from": "2021-2026 (기술 통계 전용, 설계 근거로 쓰지 않음)"
+  },
+  "target_distribution": {
+    "c0_share": 0.5729547498722022,
+    "guaranteed_90_overall_min": 73.0978518870164,
+    "guaranteed_95_overall_min": 153.75135370289803
+  },
+  "departure_hour": {
+    "best_hour": 5,
+    "worst_hour": 20,
+    "guaranteed_90_best_min": 15.370510396975455,
+    "guaranteed_90_worst_min": 113.3678715761114
+  },
+  "one_hot_airports": {
+    "n_airports_total": 367,
+    "n_onehot": 136,
+    "coverage": 0.95,
+    "other_airports": 231,
+    "other_share": 0.04938569237751979
+  },
+  "correlation": {
+    "max_pair": [
+      "CRSElapsedTime",
+      "Distance"
+    ],
+    "max_corr": 0.988630079963066
+  },
+  "single_feature_spread": {
+    "spread": {
+      "crs_dep_hour": 0.3148,
+      "sched_pad": 0.0845,
+      "days_to_nearest_holiday": 0.0762,
+      "Distance": 0.0751,
+      "CRSElapsedTime": 0.0513,
+      "dest_arr_load": 0.0461
+    }
+  },
+  "candidates_per_day": {
+    "median_candidates": 3.0,
+    "mean_candidates": 3.906002780235056,
+    "single_flight_share": 0.30262605838493617
+  },
+  "cause_mix": {
+    "overall_share": {
+      "CarrierDelay": 0.3448,
+      "WeatherDelay": 0.0623,
+      "NASDelay": 0.1844,
+      "SecurityDelay": 0.0018,
+      "LateAircraftDelay": 0.4067
+    }
+  }
+}

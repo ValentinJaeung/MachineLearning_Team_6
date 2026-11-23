@@ -48,6 +48,7 @@ STEPS = [
     (14, "step14_scenario_models.py", "모델 A·B·C와 합성", "45분"),
     (15, "step15_service_eval.py", "test 2026 서비스 평가 (한 번만)", "10분"),
     (16, "step16_demo_data.py", "데모용 사전 계산", "5분"),
+    (None, "step16b_case_study.py", "실제 한 편 사례 (조건을 적고 고름)", "6분"),
     (None, "figure_guarantee.py", "방법 설명 그림 (분포 → 보장 시각)", "1분"),
     (None, "verify_numbers.py", "문서의 모든 숫자를 results/ 로 역추적", "4분"),
 ]
